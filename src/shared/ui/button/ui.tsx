@@ -1,9 +1,8 @@
-import type { ButtonHTMLAttributes } from "react";
-import { VariantProps, tv } from "tailwind-variants";
-import { tw } from "typewind";
+import type { ButtonHTMLAttributes } from 'react';
+import { VariantProps, tv } from 'tailwind-variants';
+import { tw } from 'typewind';
 
-const base =
-  tw.inline_block.h_["52px"].rounded_full.font_semibold.px_14.text_["18px"];
+const base = tw.inline_block.h_['52px'].rounded_full.font_semibold.px_14.text_['18px'];
 
 const buttonVariants = tv({
   base,
@@ -14,20 +13,13 @@ const buttonVariants = tv({
     },
   },
   defaultVariants: {
-    variant: "primary",
+    variant: 'primary',
   },
 });
 
-interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {}
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {}
 
-export const Button = ({
-  className,
-  variant,
-  children,
-  ...props
-}: ButtonProps) => {
+export const Button = ({ className, variant, children, ...props }: ButtonProps) => {
   return (
     <button className={buttonVariants({ variant, className })} {...props}>
       {children}

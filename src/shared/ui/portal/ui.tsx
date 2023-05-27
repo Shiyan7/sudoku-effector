@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, type PropsWithChildren } from "react";
-import { createPortal } from "react-dom";
+import { useEffect, useRef, useState, type PropsWithChildren } from 'react';
+import { createPortal } from 'react-dom';
 
 interface PortalProps extends PropsWithChildren {
   rootId?: string;
@@ -16,7 +16,5 @@ export const Portal = ({ rootId, children }: PortalProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return mounted && !!containerRef.current
-    ? createPortal(children, containerRef.current)
-    : null;
+  return mounted && !!containerRef.current ? createPortal(children, containerRef.current) : null;
 };
