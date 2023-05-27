@@ -9,6 +9,7 @@ module.exports = {
   theme: {
     colors: {
       'white': "#fff",
+      'black': "#000",
       'polar': '#f4f9fd',
       'blue': {
         100: '#2e85ec',
@@ -18,7 +19,11 @@ module.exports = {
     fontFamily: {
       sans: ['sans-serif'],
     },
-    extend: {},
+    extend: {
+      zIndex: {
+        '1000': '1000',
+      }
+    },
   },
   plugins: [],
 };

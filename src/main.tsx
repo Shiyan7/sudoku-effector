@@ -4,11 +4,13 @@ import "./index.css";
 import { createHistoryRouter } from "atomic-router";
 import { RouterProvider } from "atomic-router-react";
 import { createBrowserHistory } from "history";
-import { App } from "./app";
-import { routesMap } from "./pages";
+import { App } from "@/app";
+import { routesMap } from "@/pages";
+import { controls } from "@/shared/routing";
 
 export const router = createHistoryRouter({
   routes: routesMap,
+  controls,
 });
 
 const history = createBrowserHistory();

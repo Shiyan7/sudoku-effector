@@ -1,14 +1,9 @@
 import { lazy } from "react";
 import { Route } from "atomic-router-react";
-import { routes } from "../shared/lib/atomic-router/routes";
+import { routes } from "@/shared/routing";
 import { tw } from "typewind";
-
-const HomePage = lazy(() =>
-  import("./home").then((module) => ({ default: module.HomePage }))
-);
-const GamePage = lazy(() =>
-  import("./game").then((module) => ({ default: module.GamePage }))
-);
+import { HomePage } from "./home";
+import { GamePage } from "./game";
 
 export const Pages = () => (
   <div className={tw.px_5.h_full.max_w_lg.mx_auto.my_0.sm(tw.max_w_xs.px_0)}>
