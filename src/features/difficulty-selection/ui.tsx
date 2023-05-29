@@ -14,8 +14,13 @@ export const DifficultySelection = () => {
         {difficultyItems.map(({ type, label }) => (
           <li
             key={type}
-            onClick={() => difficultyChosen({ type })}
-            className="cursor-pointer text-xl text-blue-100 border-b-[1px] border-[#f4f4f4] last:border-none font-medium py-[11px] hover:bg-[#f4f4f4]">
+            onClick={() =>
+              difficultyChosen({
+                type,
+              })
+            }
+            className="cursor-pointer text-xl text-blue-100 not-last:border-b-[1px] not-last:border-[#f4f4f4] font-medium py-[11px] hover:bg-[#f4f4f4]"
+          >
             {label}
           </li>
         ))}
