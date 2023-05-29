@@ -1,15 +1,14 @@
 import type { HTMLAttributes, PropsWithChildren } from 'react';
 import { VariantProps, tv } from 'tailwind-variants';
-import { tw } from 'typewind';
 
-const base = tw.text_blue_900.font_bold;
+const base = 'text-blue-900 font-bold';
 
 const titleVariants = tv({
   base,
   variants: {
     size: {
-      default: tw.text_['35px'].sm(tw.text_['40px'].leading_10).leading_9,
-      sm: tw.text_['18px'].font_semibold,
+      default: 'text-[35px] leading_9 sm:text[40px] sm:leading-10',
+      sm: 'text-[18px] font-semibold',
     },
   },
   defaultVariants: {

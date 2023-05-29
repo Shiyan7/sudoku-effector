@@ -1,5 +1,4 @@
 import { DifficultySelection, difficultyModel } from '@/features/difficulty-selection';
-import { tw } from 'typewind';
 import { useToggler } from '@/shared/lib';
 import { Button, Title } from '@/shared/ui';
 
@@ -7,15 +6,17 @@ export const HomePage = () => {
   const { open } = useToggler(difficultyModel.toggler);
 
   return (
-    <div className={tw.flex.flex_col.h_full.justify_center.items_center}>
-      <Title className={tw.text_center.pb_['4px'].sm(tw.pb_['10px'])}>Киллер судоку</Title>
-      <Title size="sm" className={tw.text_center.pb_36}>
-        Кроссворд из цифр
-      </Title>
-      <Button onClick={open} className={tw.w_full.max_w_['95%'].sm(tw.max_w_full)}>
-        Новая игра
-      </Button>
-      <DifficultySelection />
+    <div className="px-5 h-full max-w-lg mx-auto my-0 sm:max-w-xs sm:px-0">
+      <div className="flex flex-col h-full justify-center items-center">
+        <Title className="text-center pb-[4px] sm:pb-[10px]">Киллер судоку</Title>
+        <Title size="sm" className="text-center pb-36">
+          Кроссворд из цифр
+        </Title>
+        <Button onClick={open} className="w-full max-w-[95%] sm:max-w-full">
+          Новая игра
+        </Button>
+        <DifficultySelection />
+      </div>
     </div>
   );
 };

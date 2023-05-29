@@ -1,7 +1,7 @@
-import { createToggler } from '@/shared/lib';
-import { routes } from '@/shared/routing';
 import { redirect } from 'atomic-router';
 import { createEvent, createStore, sample } from 'effector';
+import { createToggler } from '@/shared/lib';
+import { routes } from '@/shared/routing';
 
 export const toggler = createToggler();
 
@@ -16,6 +16,6 @@ sample({
 
 redirect({
   clock: difficultyChosen,
-  query: $difficulty,
+  params: $difficulty,
   route: routes.game,
 });

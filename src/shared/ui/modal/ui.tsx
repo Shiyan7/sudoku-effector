@@ -1,5 +1,4 @@
 import { PropsWithChildren } from 'react';
-import { tw } from 'typewind';
 import { useEscape, useLockedBody } from './lib';
 import { Portal } from '../portal';
 
@@ -17,17 +16,11 @@ export const Modal = ({ children, isOpen, close }: ModalProps) => {
     <Portal rootId="#modal">
       {isOpen && (
         <div
-          className={tw.fixed.inset_x_0.inset_y_0.overflow_x_hidden.overflow_y_auto.text_center.z_1000
-            .before(tw.content_['_↗'].inline_block.align_bottom.h_full.sm(tw.align_middle))
-            .after(tw.content_['_↗'].block.fixed.inset_x_0.inset_y_0.cursor_pointer.bg_black$['70'])}
-          onClick={close}
-        >
+          className="fixed inset-x-0 inset-y-0 overflow-x-hidden overflow-y-auto text-center z-1000 before:content-[''] before:inline-block before:align-bottom before:h-full before:sm:align-middle after:content-[''] after:block after:fixed after:inset-x-0 after:inset-y-0 after:cursor-pointer after:bg-black/70"
+          onClick={close}>
           <div
             onClick={(e) => e.stopPropagation()}
-            className={tw.relative.z_10.mx_auto.inline_flex.items_center.flex_col.align_middle.my_14.w_['85%'].sm(
-              tw.w_auto
-            )}
-          >
+            className="relative z-10 mx-auto inline-flex items-center flex-col align-middle my-14 w-[85%] sm:w-auto">
             {children}
           </div>
         </div>

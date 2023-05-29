@@ -2,8 +2,7 @@ import { Modal } from '@/shared/ui/modal';
 import { useToggler } from '@/shared/lib';
 import { difficultyModel } from '@/features/difficulty-selection';
 import { useUnit } from 'effector-react';
-import { tw } from 'typewind';
-import { items } from './config';
+import { difficultyItems } from '@/shared/config';
 
 export const DifficultySelection = () => {
   const { isOpen, close } = useToggler(difficultyModel.toggler);
@@ -11,20 +10,13 @@ export const DifficultySelection = () => {
 
   return (
     <Modal isOpen={isOpen} close={close}>
-      <ul
-        className={tw.list_none.p_0.m_0.py_['5px'].min_w_full.rounded_['25px'].bg_white.overflow_hidden.sm(
-          tw.min_w_['300px']
-        )}
-      >
-        {items.map(({ type, text }) => (
+      <ul className="list-none p-0 m-0 py-[5px] min-w-full rounded-[25px] bg-white overflow-hidden sm:min-w-[300px]">
+        {difficultyItems.map(({ type, label }) => (
           <li
             key={type}
             onClick={() => difficultyChosen({ type })}
-            className={tw.cursor_pointer.text_xl.text_blue_100.border_b_['1px'].border_['#f4f4f4']
-              .last(tw.border_none)
-              .font_medium.py_['11px'].hover(tw.bg_['#f4f4f4'])}
-          >
-            {text}
+            className="cursor-pointer text-xl text-blue-100 border-b-[1px] border-[#f4f4f4] last:border-none font-medium py-[11px] hover:bg-[#f4f4f4]">
+            {label}
           </li>
         ))}
       </ul>

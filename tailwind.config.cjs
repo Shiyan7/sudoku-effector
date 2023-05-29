@@ -1,16 +1,17 @@
-const { typewindTransforms } = require("typewind/transform");
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: {
     files: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-    transform: typewindTransforms,
   },
   theme: {
     colors: {
+      'gray': {
+        100: '#f4f4f4',
+        300: '#94a3b7',
+        400: '#6e7c8c'
+      },
       'white': "#fff",
       'black': "#000",
-      'polar': '#f4f9fd',
       'blue': {
         100: '#2e85ec',
         900: "#314b62"
