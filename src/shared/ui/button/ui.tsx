@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes } from 'react';
 import { VariantProps, tv } from 'tailwind-variants';
 
-const base = 'inline-block h-[52px] rounded-full font-semibold px-14 text-[18px]';
+const base = 'inline-block h-[54px] rounded-full font-semibold px-14 text-[18px]';
 
 const buttonVariants = tv({
   base,

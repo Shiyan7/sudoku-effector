@@ -3,4 +3,5 @@ export const difficultyItems = [
   { type: 'medium', label: 'Средний' },
   { type: 'hard', label: 'Сложный' },
   { type: 'expert', label: 'Экспертный' },
+  { type: 'evil', label: 'Безумный' },
 ];

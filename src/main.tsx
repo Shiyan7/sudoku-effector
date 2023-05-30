@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { createHistoryRouter } from 'atomic-router';
@@ -16,9 +16,9 @@ const history = createBrowserHistory();
 router.setHistory(history);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+  <StrictMode>
     <RouterProvider router={router}>
       <App />
     </RouterProvider>
-  </React.StrictMode>
+  </StrictMode>
 );
