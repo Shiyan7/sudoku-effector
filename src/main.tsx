@@ -1,24 +1,7 @@
-import { StrictMode } from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import { createHistoryRouter } from 'atomic-router';
-import { RouterProvider } from 'atomic-router-react';
-import { createBrowserHistory } from 'history';
+import { createRoot } from 'react-dom/client';
 import { App } from '@/app';
-import { routesMap } from '@/pages';
+import './index.css';
 
-export const router = createHistoryRouter({
-  routes: routesMap,
-});
+const root = createRoot(document.getElementById('root') as HTMLElement);
 
-const history = createBrowserHistory();
-
-router.setHistory(history);
-
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <RouterProvider router={router}>
-      <App />
-    </RouterProvider>
-  </StrictMode>
-);
+root.render(<App />);
