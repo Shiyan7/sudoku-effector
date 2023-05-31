@@ -10,7 +10,7 @@ export const GameSection = () => {
               {rows.map((column) => {
                 return (
                   <td
-                    className="text-3xl font-light text-center border-[1px] border-blue-200 w-[48px] h-[48px] cursor-pointer [&:nth-child(3n)]:border-r-[2px] [&:nth-child(3n)]:border-r-blue-900"
+                    className="text-3xl text-blue-900 font-light text-center border-[1px] border-blue-200 sm:w-[48px] sm:h-[48px] w-[42px] h-[42px] cursor-pointer [&:nth-child(3n)]:border-r-[2px] [&:nth-child(3n)]:border-r-blue-900 select-none"
                     key={column}>
                     {column}
                   </td>

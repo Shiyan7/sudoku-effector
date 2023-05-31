@@ -1,4 +1,4 @@
-import { useEvent, useStore, useUnit } from 'effector-react';
+import { useUnit } from 'effector-react';
 import type { TogglerInstance } from './types';
 
 export function useToggler(togglerInstance: TogglerInstance) {
