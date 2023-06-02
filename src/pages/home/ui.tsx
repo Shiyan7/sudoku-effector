@@ -1,4 +1,4 @@
-import { DifficultySelection, difficultyModel } from '@/features/difficulty-selection';
+import { difficultyModel } from '@/features/difficulty-selection';
 import { useToggler } from '@/shared/lib';
 import { Button, Title } from '@/shared/ui';
 
@@ -15,7 +15,6 @@ export const HomePage = () => {
         <Button onClick={open} className="w-full max-w-[95%] sm:max-w-full">
           Новая игра
         </Button>
-        <DifficultySelection />
       </div>
     </div>
   );

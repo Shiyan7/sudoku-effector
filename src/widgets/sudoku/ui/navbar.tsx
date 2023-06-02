@@ -35,7 +35,7 @@ export const Navbar = () => {
         </ul>
         <button className="flex sm:hidden items-center text-xs font-semibold text-gray-300">
           {currentDifficulty?.label}
-          <Icon className="w-5 h-5 ml-1 rotate-[-90deg]" type="common" name="chevron" />
+          <Icon className="w-5 h-5 ml-1 rotate-[-90deg]" name="common/chevron" />
         </button>
       </div>
       <div className="text-blue-900 text-xs font-semibold">Ошибки: 0/3</div>

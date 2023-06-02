@@ -1,1 +1,1 @@
-export { Icon } from './ui';
+export { Icon, type IconName } from './ui';

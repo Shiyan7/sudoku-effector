@@ -8,6 +8,7 @@ const buttonVariants = tv({
   variants: {
     variant: {
       primary: 'bg-blue-100 text-white',
+      square: 'bg-blue-100 text-white rounded-md',
     },
   },
   defaultVariants: {
