@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@donmahallem/sudoku": "^0.4.2",
     "atomic-router": "^0.8.0",
     "atomic-router-react": "^0.8.3",
     "autoprefixer": "^10.4.14",
@@ -21,6 +22,7 @@
     "patronum": "^1.18.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sudoku.utils": "^0.1.2",
     "tailwind-variants": "^0.1.2",
     "tailwindcss": "^3.3.1"
   },

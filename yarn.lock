@@ -224,6 +224,11 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
+"@donmahallem/sudoku@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@donmahallem/sudoku/-/sudoku-0.4.2.tgz#3350dc7fd784031adc29dcea1bbbe27cf6fc597b"
+  integrity sha512-a/3dUDqewxohF7frO4L4q7lHoXUDnnitzuYA2wBrmQUHr/A9AN5dN/vCzGqKZYQrmLYpHKH+ym10q5ZVu1pQQA==
+
 "@esbuild/android-arm64@0.17.17":
   version "0.17.17"
   resolved "https://registry.yarnpkg.com/@esbuild/android-arm64/-/android-arm64-0.17.17.tgz#164b054d58551f8856285f386e1a8f45d9ba3a31"
@@ -3359,6 +3364,11 @@ sucrase@^3.29.0:
     mz "^2.7.0"
     pirates "^4.0.1"
     ts-interface-checker "^0.1.9"
+
+sudoku.utils@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/sudoku.utils/-/sudoku.utils-0.1.2.tgz#313d086936e66006feaf443887b952a543aa7d73"
+  integrity sha512-ubKevJD6C6aNrjP99sy+EOKKRI4Lr5iD7NkbFGJimbICcGCZoAhh6LV9F9WApgHsoumJePPwL67Ow05FpTQsLw==
 
 supports-color@^5.3.0:
   version "5.5.0"
