@@ -1,6 +1,8 @@
 import { routes } from '@/shared/routing';
 import { createStore, createEvent, sample, forward } from 'effector';
+import { reset } from 'patronum';
 import sudoku from 'sudoku.utils';
+import { $selectedCellIndex } from './cell';
 
 export const $board = createStore<string>('');
 export const $solved = createStore<string>('');
@@ -23,4 +25,9 @@ sample({
 forward({
   from: [routes.game.opened, routes.game.updated],
   to: newGameStarted,
+});
+
+reset({
+  clock: newGameStarted,
+  target: $selectedCellIndex,
 });
