@@ -224,11 +224,6 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@donmahallem/sudoku@^0.4.2":
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/@donmahallem/sudoku/-/sudoku-0.4.2.tgz#3350dc7fd784031adc29dcea1bbbe27cf6fc597b"
-  integrity sha512-a/3dUDqewxohF7frO4L4q7lHoXUDnnitzuYA2wBrmQUHr/A9AN5dN/vCzGqKZYQrmLYpHKH+ym10q5ZVu1pQQA==
-
 "@esbuild/android-arm64@0.17.17":
   version "0.17.17"
   resolved "https://registry.yarnpkg.com/@esbuild/android-arm64/-/android-arm64-0.17.17.tgz#164b054d58551f8856285f386e1a8f45d9ba3a31"
@@ -1369,6 +1364,11 @@ eastasianwidth@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/eastasianwidth/-/eastasianwidth-0.2.0.tgz#696ce2ec0aa0e6ea93a397ffcf24aa7840c827cb"
   integrity sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==
+
+effector-hotkey@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/effector-hotkey/-/effector-hotkey-0.2.3.tgz#1cf565589b9d625a3923e4ea41a14fe12bae1645"
+  integrity sha512-2zFmy8adVEDCKRUfC8augg+J0kCVpgAcn7uV96uhcuDjnL7YGHWxHrWAnTaXwFTJgH0W0LnW+jimIkLiFqzRWA==
 
 effector-react@^22.5.1:
   version "22.5.1"

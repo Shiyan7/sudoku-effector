@@ -11,10 +11,10 @@ export const Navbar = () => {
   const currentDifficulty = difficultyItems.find(({ type }) => type === params?.type);
 
   return (
-    <div className="flex px-2 sm:px-0 items-center justify-between mb-3">
-      <div className="flex flex-col sm:flex-row items-center">
-        <span className="text-xs hidden sm:block font-medium mr-2 text-gray-300">Уровень:</span>
-        <ul className="hidden sm:flex items-center">
+    <div className="flex px-2 md:px-0 items-center justify-between mb-3">
+      <div className="flex flex-col md:flex-row items-center">
+        <span className="text-xs hidden md:block font-medium mr-2 text-gray-300">Уровень:</span>
+        <ul className="hidden md:flex items-center">
           {difficultyItems.map(({ type, label }) => {
             const isActive = type === params.type;
 
@@ -33,7 +33,7 @@ export const Navbar = () => {
             );
           })}
         </ul>
-        <button className="flex sm:hidden items-center text-xs font-semibold text-gray-300">
+        <button className="flex md:hidden items-center text-xs font-semibold text-gray-300">
           {currentDifficulty?.label}
           <Icon className="w-5 h-5 ml-1 rotate-[-90deg]" name="common/chevron" />
         </button>

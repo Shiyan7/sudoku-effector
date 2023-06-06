@@ -10,12 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@donmahallem/sudoku": "^0.4.2",
     "atomic-router": "^0.8.0",
     "atomic-router-react": "^0.8.3",
     "autoprefixer": "^10.4.14",
     "clsx": "^1.2.1",
     "effector": "^22.8.1",
+    "effector-hotkey": "^0.2.3",
     "effector-react": "^22.5.1",
     "history": "^5.3.0",
     "moment": "^2.29.4",
