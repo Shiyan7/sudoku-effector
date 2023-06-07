@@ -11,13 +11,14 @@ module.exports = {
       transparent: 'transparent',
       white: "#fff",
       black: "#000",
+      red: '#e55c6c',
       gray: {
         100: '#f4f4f4',
         300: '#94a3b7',
         400: '#6e7c8c'
       },
       blue: {
-        100: '#0966D4',
+        100: '#0072e3',
         200: '#b9c8da',
         400: '#eaeef4',
         500: '#dce3ed',

@@ -35,8 +35,10 @@ export const Timer = () => {
 
   return (
     <div className="flex items-center text-xs font-semibold text-gray-300">
-      <span className="block mr-2">{formatTime(time)}</span>
-      <button className="flex items-center justify-center w-6 h-6 bg-blue-400 rounded-full" onClick={toggleTimer}>
+      <span className="block mr-2 min-w-[40px] text-center">{formatTime(time)}</span>
+      <button
+        className="flex items-center justify-center w-[25px] h-[25px] bg-blue-400 rounded-full"
+        onClick={toggleTimer}>
         <Icon className="w-3 h-3 fill-gray-300 stroke-gray-300" name={isRunning ? 'common/pause' : 'common/play'} />
       </button>
     </div>
