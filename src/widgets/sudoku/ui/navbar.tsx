@@ -1,13 +1,14 @@
 import clsx from 'clsx';
 import { Link } from 'atomic-router-react';
 import { useUnit } from 'effector-react';
+import { sudokuModel } from '@/widgets/sudoku';
 import { routes } from '@/shared/routing';
 import { difficultyItems } from '@/shared/config';
 import { Timer } from '@/features/timer';
 import { Icon } from '@/shared/ui';
 
 export const Navbar = () => {
-  const params = useUnit(routes.game.$params);
+  const { params, mistakes } = useUnit({ params: routes.game.$params, mistakes: sudokuModel.$mistakes });
   const currentDifficulty = difficultyItems.find(({ type }) => type === params?.type);
 
   return (
@@ -38,7 +39,7 @@ export const Navbar = () => {
           <Icon className="w-5 h-5 ml-1 rotate-[-90deg]" name="common/chevron" />
         </button>
       </div>
-      <div className="text-blue-900 text-xs font-semibold">Ошибки: 0/3</div>
+      <div className="text-blue-900 text-xs font-semibold">Ошибки: {mistakes}/3</div>
       <Timer />
     </div>
   );

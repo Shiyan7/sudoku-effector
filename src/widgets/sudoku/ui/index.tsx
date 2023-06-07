@@ -5,9 +5,14 @@ import { Navbar } from './navbar';
 import { Controls } from './controls';
 import { useToggler } from '@/shared/lib';
 import { difficultyModel } from '@/features/difficulty-selection';
+import { useUnit } from 'effector-react';
+import { sudokuModel } from '@/widgets/sudoku';
 
 export const Sudoku = () => {
   const { open } = useToggler(difficultyModel.toggler);
+  const { isLoss } = useUnit({ isLoss: sudokuModel.$isLoss });
+
+  console.log(isLoss);
 
   return (
     <>
