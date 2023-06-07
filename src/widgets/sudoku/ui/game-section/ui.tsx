@@ -8,6 +8,7 @@ export const GameSection = () => {
     selectedCellIndex: sudokuModel.$selectedCellIndex,
     cellSelected: sudokuModel.cellSelected,
   });
+
   const rows = Array.from({ length: 9 }, (_, v) => v);
   const grid = board.split('').map((value) => (value === '.' ? 0 : parseInt(value)));
 

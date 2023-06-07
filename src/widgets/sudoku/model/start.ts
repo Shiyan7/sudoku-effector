@@ -1,7 +1,7 @@
-import { routes } from '@/shared/routing';
-import { createStore, createEvent, sample, forward } from 'effector';
-import { reset } from 'patronum';
 import sudoku from 'sudoku.utils';
+import { reset } from 'patronum';
+import { createStore, createEvent, sample, forward } from 'effector';
+import { routes } from '@/shared/routing';
 import { $selectedCellIndex } from './cell';
 
 export const $board = createStore<string>('');

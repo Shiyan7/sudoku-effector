@@ -1,5 +1,3 @@
-import { useUnit } from 'effector-react';
-import { sudokuModel } from '@/widgets/sudoku';
 import clsx from 'clsx';
 
 interface CellProps {

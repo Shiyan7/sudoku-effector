@@ -1,3 +1,3 @@
 export * from './start';
-export * from './hotkey';
+export * from './controls';
 export * from './cell';
