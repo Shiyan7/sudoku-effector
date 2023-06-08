@@ -1,4 +1,4 @@
-import { createEffect, createEvent, createStore, sample } from 'effector';
+import { createEffect, createEvent, sample } from 'effector';
 import { hotkey } from 'effector-hotkey';
 import { $selectedCellIndex } from './cell';
 import { $board, $solved } from './start';

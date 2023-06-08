@@ -22,14 +22,14 @@ export const Timer = () => {
     return () => clearInterval(timer);
   }, [isRunning]);
 
-  const formatTime = (time: number): string => {
-    const minutes: number = Math.floor(time / 60);
-    const seconds: number = time % 60;
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
 
     return `${padZero(minutes)}:${padZero(seconds)}`;
   };
 
-  const padZero = (value: number): string => {
+  const padZero = (value: number) => {
     return value.toLocaleString('en-US', { minimumIntegerDigits: 2 });
   };
 
