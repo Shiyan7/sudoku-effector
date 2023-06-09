@@ -8,13 +8,17 @@ import { Timer } from '@/features/timer';
 import { Icon } from '@/shared/ui';
 
 export const Navbar = () => {
-  const { params, mistakes } = useUnit({ params: routes.game.$params, mistakes: sudokuModel.$mistakes });
+  const { params, mistakes, difficultyLinkClicked } = useUnit({
+    params: routes.game.$params,
+    mistakes: sudokuModel.$mistakes,
+    difficultyLinkClicked: sudokuModel.difficultyLinkClicked,
+  });
   const currentDifficulty = difficultyItems.find(({ type }) => type === params?.type);
 
   return (
     <div className="flex px-2 md:px-0 items-center justify-between mb-3">
       <div className="flex flex-col md:flex-row items-center">
-        <span className="text-xs hidden md:block font-medium mr-2 text-gray-300">Уровень:</span>
+        <span className="text-xs hidden md:block font-semibold mr-2 text-gray-300">Уровень:</span>
         <ul className="hidden md:flex items-center">
           {difficultyItems.map(({ type, label }) => {
             const isActive = type === params.type;
@@ -26,6 +30,7 @@ export const Navbar = () => {
                     'inline-block rounded transition duration-200 hover:bg-[#f1f4f8] text-xs font-semibold p-2',
                     isActive ? 'text-blue-100' : 'text-gray-400'
                   )}
+                  onClick={difficultyLinkClicked}
                   to={routes.game}
                   params={{ type }}>
                   {label}

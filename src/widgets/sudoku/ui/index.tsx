@@ -1,18 +1,22 @@
+import { useUnit } from 'effector-react';
+import { sudokuModel } from '@/widgets/sudoku';
+import { DifficultySelection, difficultyModel } from '@/features/difficulty-selection';
 import { Button } from '@/shared/ui/button';
+import { useToggler } from '@/shared/lib';
 import { Actions } from './actions';
 import { GameSection } from './game-section';
 import { Navbar } from './navbar';
 import { Controls } from './controls';
-import { useToggler } from '@/shared/lib';
-import { difficultyModel } from '@/features/difficulty-selection';
-import { useUnit } from 'effector-react';
-import { sudokuModel } from '@/widgets/sudoku';
+import { GameOver } from './game-over';
 
 export const Sudoku = () => {
-  const { open } = useToggler(difficultyModel.toggler);
-  const { isLoss } = useUnit({ isLoss: sudokuModel.$isLoss });
-
-  console.log(isLoss);
+  const { open } = useToggler(difficultyModel.difficultyToggler);
+  const { cancelClicked, startAgainClicked, isLoss, difficultySelected } = useUnit({
+    cancelClicked: sudokuModel.cancelClicked,
+    startAgainClicked: sudokuModel.startAgainClicked,
+    isLoss: sudokuModel.$isLoss,
+    difficultySelected: sudokuModel.difficultySelected,
+  });
 
   return (
     <>
@@ -27,6 +31,18 @@ export const Sudoku = () => {
           </Button>
         </div>
       </div>
+      <GameOver />
+      {isLoss ? (
+        <DifficultySelection
+          onSelect={difficultySelected}
+          onCancel={cancelClicked}
+          onStartAgain={startAgainClicked}
+          description="Прогресс текущей игры будет потерян"
+          isClosable={false}
+        />
+      ) : (
+        <DifficultySelection description="Пазлы для всех уровней мастерства" />
+      )}
     </>
   );
 };

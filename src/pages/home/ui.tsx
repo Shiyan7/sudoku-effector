@@ -1,9 +1,9 @@
-import { difficultyModel } from '@/features/difficulty-selection';
+import { DifficultySelection, difficultyModel } from '@/features/difficulty-selection';
 import { useToggler } from '@/shared/lib';
 import { Button, Title } from '@/shared/ui';
 
 export const HomePage = () => {
-  const { open } = useToggler(difficultyModel.toggler);
+  const { open } = useToggler(difficultyModel.difficultyToggler);
 
   return (
     <div className="px-6 min-h-[350px] h-screen flex items-center justify-center max-w-lg mx-auto my-0 sm:max-w-xs sm:px-0">
@@ -16,6 +16,7 @@ export const HomePage = () => {
           Новая игра
         </Button>
       </div>
+      <DifficultySelection description="Пазлы для всех уровней мастерства" />
     </div>
   );
 };

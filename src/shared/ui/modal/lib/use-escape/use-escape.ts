@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
-export function useEscape(callback: (event: KeyboardEvent) => unknown) {
+export function useEscape(callback?: (event: KeyboardEvent) => unknown) {
   useEffect(() => {
     function handleEscape(event: KeyboardEvent) {
       if (event.key === 'Escape') {
-        callback(event);
+        callback && callback(event);
       }
     }
 

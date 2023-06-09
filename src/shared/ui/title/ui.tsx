@@ -8,6 +8,7 @@ const titleVariants = tv({
   variants: {
     size: {
       default: 'text-[35px] leading_9 sm:text[40px] sm:leading-10',
+      md: 'text-[19px] font-bold',
       sm: 'text-[18px] font-semibold',
     },
   },

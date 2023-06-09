@@ -2,7 +2,8 @@ import { createEffect, createEvent, sample } from 'effector';
 import { hotkey } from 'effector-hotkey';
 import { $selectedCellIndex } from './cell';
 import { $board, $solved } from './start';
-import { $mistakes } from './mistakes';
+import { $isLoss, $mistakes } from './mistakes';
+import { not } from 'patronum';
 
 const keys = Array.from({ length: 9 }, (_, v) => v + 1).join('+');
 
@@ -32,6 +33,7 @@ const fillCellFx = createEffect<Params, string>(({ board, solved, index, key }) 
 sample({
   clock: [keyPressed, numberPressed],
   source: { board: $board, solved: $solved, index: $selectedCellIndex },
+  filter: not($isLoss),
   fn: ({ board, solved, index }, { key }) => ({ board, solved, index, key }),
   target: fillCellFx,
 });

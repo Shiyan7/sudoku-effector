@@ -5,7 +5,7 @@ import { Icon } from '@/shared/ui';
 import { useToggler } from '@/shared/lib';
 
 export const Header = () => {
-  const { open } = useToggler(difficultyModel.toggler);
+  const { open } = useToggler(difficultyModel.difficultyToggler);
 
   return (
     <header className="pt-5 pb-6 px-1 md:px-0 relative flex items-center">
