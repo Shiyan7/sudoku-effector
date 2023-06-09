@@ -1,7 +1,6 @@
 import { useUnit } from 'effector-react';
 import { sudokuModel } from '@/widgets/sudoku';
 import { timerModel } from '@/features/timer';
-import { TABLE_COLS } from '@/shared/config';
 import { Icon } from '@/shared/ui/icon';
 import { Cell } from './cell';
 
@@ -16,7 +15,7 @@ export const GameSection = () => {
     selectedColumn: sudokuModel.$selectedColumn,
   });
 
-  const rows = Array.from({ length: TABLE_COLS }, (_, v) => v);
+  const rows = Array.from({ length: 9 }, (_, v) => v);
   const grid = board.split('').map((value) => (value === '.' ? 0 : parseInt(value)));
 
   return (
@@ -33,7 +32,7 @@ export const GameSection = () => {
           {rows.map((row) => (
             <tr className="[&:nth-child(3n)]:border-b-[2px] [&:nth-child(3n)]:border-blue-900" key={row}>
               {rows.map((column) => {
-                const idxOfArray = row * TABLE_COLS + column;
+                const idxOfArray = row * 9 + column;
                 const value = grid[idxOfArray];
                 const isCellSelected = selectedCellIndex === idxOfArray;
                 const isRowSelected = selectedRow === row;

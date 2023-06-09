@@ -11,11 +11,10 @@ import { GameOver } from './game-over';
 
 export const Sudoku = () => {
   const { open } = useToggler(difficultyModel.difficultyToggler);
-  const { cancelClicked, startAgainClicked, isLoss, difficultySelected } = useUnit({
+  const { cancelClicked, startAgainClicked, isLoss } = useUnit({
     cancelClicked: sudokuModel.cancelClicked,
     startAgainClicked: sudokuModel.startAgainClicked,
     isLoss: sudokuModel.$isLoss,
-    difficultySelected: sudokuModel.difficultySelected,
   });
 
   return (
@@ -34,7 +33,6 @@ export const Sudoku = () => {
       <GameOver />
       {isLoss ? (
         <DifficultySelection
-          onSelect={difficultySelected}
           onCancel={cancelClicked}
           onStartAgain={startAgainClicked}
           description="Прогресс текущей игры будет потерян"

@@ -6,12 +6,13 @@ import { routes } from '@/shared/routing';
 import { difficultyItems } from '@/shared/config';
 import { Timer } from '@/features/timer';
 import { Icon } from '@/shared/ui';
+import { difficultyModel } from '@/features/difficulty-selection';
 
 export const Navbar = () => {
-  const { params, mistakes, difficultyLinkClicked } = useUnit({
+  const { params, mistakes, difficultyChosen } = useUnit({
     params: routes.game.$params,
     mistakes: sudokuModel.$mistakes,
-    difficultyLinkClicked: sudokuModel.difficultyLinkClicked,
+    difficultyChosen: difficultyModel.difficultyChosen,
   });
   const currentDifficulty = difficultyItems.find(({ type }) => type === params?.type);
 
@@ -30,7 +31,7 @@ export const Navbar = () => {
                     'inline-block rounded transition duration-200 hover:bg-[#f1f4f8] text-xs font-semibold p-2',
                     isActive ? 'text-blue-100' : 'text-gray-400'
                   )}
-                  onClick={difficultyLinkClicked}
+                  onClick={() => difficultyChosen({ type })}
                   to={routes.game}
                   params={{ type }}>
                   {label}

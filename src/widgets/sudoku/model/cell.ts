@@ -1,4 +1,3 @@
-import { TABLE_COLS } from '@/shared/config';
 import { createStore, createEvent, sample } from 'effector';
 
 export const $selectedCellIndex = createStore(0);
@@ -14,12 +13,12 @@ sample({
 
 sample({
   clock: $selectedCellIndex,
-  fn: (index) => Math.floor(index / TABLE_COLS),
+  fn: (index) => Math.floor(index / 9),
   target: $selectedRow,
 });
 
 sample({
   clock: $selectedCellIndex,
-  fn: (index) => index % TABLE_COLS,
+  fn: (index) => index % 9,
   target: $selectedColumn,
 });

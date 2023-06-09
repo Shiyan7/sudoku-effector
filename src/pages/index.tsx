@@ -9,8 +9,3 @@ export const Pages = () => (
     <Route route={routes.game} view={GamePage} />
   </>
 );
-
-export const routesMap = [
-  { path: '/', route: routes.home },
-  { path: '/game/:type', route: routes.game },
-];

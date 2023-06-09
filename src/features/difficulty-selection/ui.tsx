@@ -9,7 +9,6 @@ interface DifficultySelectionProps {
   description: string;
   isClosable?: boolean;
   onCancel?: () => void;
-  onSelect?: () => void;
   onStartAgain?: () => void;
 }
 
@@ -17,7 +16,6 @@ export const DifficultySelection = ({
   description,
   onCancel,
   onStartAgain,
-  onSelect,
   isClosable = true,
 }: DifficultySelectionProps) => {
   const { isOpen, close } = useToggler(difficultyModel.difficultyToggler);
@@ -34,12 +32,11 @@ export const DifficultySelection = ({
           {difficultyItems.map(({ type, label }) => (
             <li
               key={type}
-              onClick={() => {
-                onSelect && onSelect();
+              onClick={() =>
                 difficultyChosen({
                   type,
-                });
-              }}
+                })
+              }
               className="flex bg-blue-300 items-center cursor-pointer text-[15px] text-blue-100 not-last:border-b-[1px] not-last:border-b-[#e0e8f7] py-[8px] px-[15px] font-medium hover:bg-[#e4eaf1]">
               <Icon className="w-[18px] h-[18px] mr-[10px]" name="common/sudoku" />
               {label}
