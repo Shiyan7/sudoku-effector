@@ -4,6 +4,7 @@ import { $selectedCellIndex } from './cell';
 import { $board, $solved } from './start';
 import { $isLoss, $mistakes } from './mistakes';
 import { not } from 'patronum';
+import { sendHistory } from './history';
 
 const keys = Array.from({ length: 9 }, (_, v) => v + 1).join('+');
 
@@ -41,3 +42,8 @@ sample({
 $board.on(fillCellFx.doneData, (_, payload) => payload);
 
 $mistakes.on(fillCellFx.failData, (state) => state + 1);
+
+sample({
+  clock: fillCellFx.doneData,
+  target: sendHistory,
+});

@@ -4,6 +4,7 @@ import { createStore, createEvent, sample, forward } from 'effector';
 import { timerModel } from '@/features/timer';
 import { routes } from '@/shared/routing';
 import { $selectedCellIndex } from './cell';
+import { $history, sendHistory } from './history';
 
 export const $initBoard = createStore('');
 export const $board = createStore('');
@@ -18,8 +19,14 @@ forward({
 
 sample({
   clock: newGameStarted,
-  source: routes.game.$params,
-  fn: ({ type }) => sudoku.generate(type),
+  source: { params: routes.game.$params, history: $history },
+  fn: ({ params }) => sudoku.generate(params.type),
+  target: sendHistory,
+});
+
+sample({
+  clock: $history,
+  fn: (array) => array[array.length - 1],
   target: [$board, $initBoard],
 });
 
