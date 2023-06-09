@@ -2,17 +2,15 @@ import clsx from 'clsx';
 import { Link } from 'atomic-router-react';
 import { useUnit } from 'effector-react';
 import { sudokuModel } from '@/widgets/sudoku';
+import { Timer } from '@/features/timer';
 import { routes } from '@/shared/routing';
 import { difficultyItems } from '@/shared/config';
-import { Timer } from '@/features/timer';
 import { Icon } from '@/shared/ui';
-import { difficultyModel } from '@/features/difficulty-selection';
 
 export const Navbar = () => {
-  const { params, mistakes, difficultyChosen } = useUnit({
+  const { params, mistakes } = useUnit({
     params: routes.game.$params,
     mistakes: sudokuModel.$mistakes,
-    difficultyChosen: difficultyModel.difficultyChosen,
   });
   const currentDifficulty = difficultyItems.find(({ type }) => type === params?.type);
 
@@ -31,7 +29,6 @@ export const Navbar = () => {
                     'inline-block rounded transition duration-200 hover:bg-[#f1f4f8] text-xs font-semibold p-2',
                     isActive ? 'text-blue-100' : 'text-gray-400'
                   )}
-                  onClick={() => difficultyChosen({ type })}
                   to={routes.game}
                   params={{ type }}>
                   {label}

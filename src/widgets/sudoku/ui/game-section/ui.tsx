@@ -5,12 +5,12 @@ import { Icon } from '@/shared/ui/icon';
 import { Cell } from './cell';
 
 export const GameSection = () => {
-  const { board, selectedCellIndex, cellSelected, isRunning, toggleTimer, selectedRow, selectedColumn } = useUnit({
+  const { board, selectedCellIndex, cellSelected, isRunning, startTimer, selectedRow, selectedColumn } = useUnit({
     board: sudokuModel.$board,
     selectedCellIndex: sudokuModel.$selectedCellIndex,
     cellSelected: sudokuModel.cellSelected,
-    isRunning: timerModel.$isRunning,
-    toggleTimer: timerModel.toggleTimer,
+    isRunning: timerModel.isRunning,
+    startTimer: timerModel.startTimer,
     selectedRow: sudokuModel.$selectedRow,
     selectedColumn: sudokuModel.$selectedColumn,
   });
@@ -22,7 +22,7 @@ export const GameSection = () => {
     <div className="relative">
       {!isRunning && (
         <button
-          onClick={toggleTimer}
+          onClick={startTimer}
           className="absolute z-10 left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 flex items-center justify-center rounded-full bg-blue-100 text-white w-14 h-14">
           <Icon className="fill-white w-[21px] h-[21px]" name="common/play" />
         </button>
