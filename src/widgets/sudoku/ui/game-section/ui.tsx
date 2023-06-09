@@ -1,17 +1,19 @@
 import { useUnit } from 'effector-react';
 import { sudokuModel } from '@/widgets/sudoku';
-import { TABLE_COLS } from '@/shared/config';
-import { Cell } from './cell';
 import { timerModel } from '@/features/timer';
-import { Icon } from '@/shared/ui';
+import { TABLE_COLS } from '@/shared/config';
+import { Icon } from '@/shared/ui/icon';
+import { Cell } from './cell';
 
 export const GameSection = () => {
-  const { board, selectedCellIndex, cellSelected, isRunning, toggleTimer } = useUnit({
+  const { board, selectedCellIndex, cellSelected, isRunning, toggleTimer, selectedRow, selectedColumn } = useUnit({
     board: sudokuModel.$board,
     selectedCellIndex: sudokuModel.$selectedCellIndex,
     cellSelected: sudokuModel.cellSelected,
     isRunning: timerModel.$isRunning,
     toggleTimer: timerModel.toggleTimer,
+    selectedRow: sudokuModel.$selectedRow,
+    selectedColumn: sudokuModel.$selectedColumn,
   });
 
   const rows = Array.from({ length: TABLE_COLS }, (_, v) => v);
@@ -33,11 +35,15 @@ export const GameSection = () => {
               {rows.map((column) => {
                 const idxOfArray = row * TABLE_COLS + column;
                 const value = grid[idxOfArray];
+                const isCellSelected = selectedCellIndex === idxOfArray;
+                const isRowSelected = selectedRow === row;
+                const isColumnSelected = selectedColumn === column;
 
                 return (
                   <Cell
                     isHidden={!isRunning}
-                    isSelected={selectedCellIndex === idxOfArray}
+                    isCellSelected={isCellSelected}
+                    isNeighbourOfSelected={isRowSelected || isColumnSelected}
                     onSelect={() => cellSelected({ index: idxOfArray })}
                     key={idxOfArray}
                     value={value}
