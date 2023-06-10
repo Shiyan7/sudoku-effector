@@ -2,7 +2,8 @@ import { createEffect, createEvent, createStore, sample } from 'effector';
 import { hotkey } from 'effector-hotkey';
 import { $selectedCell } from './cell';
 import { $board, $solved } from './start';
-import { $countMistakes, $mistakes, wrongCellClicked } from './status';
+import { $mistakes, cellHasMistake, removeMistake, wrongCellClicked } from './mistakes';
+import { $countMistakes } from './status';
 
 const keys = Array.from({ length: 9 }, (_, v) => v + 1).join('+');
 
@@ -17,16 +18,16 @@ type UpdateBoardParams = {
   updatedBoard: Board;
   solved: string;
   key: string;
-  index: number;
+  indexOfCell: number;
   mistakes: Set<number>;
 };
 
 const updateBoardFx = createEffect<UpdateBoardParams, Board>(
-  ({ board, solved, index, key, updatedBoard, mistakes }) => {
-    const charAtIndex = board.charAt(index);
-    const solvedValue = solved.charAt(index);
+  ({ board, solved, indexOfCell, key, updatedBoard, mistakes }) => {
+    const charAtIndex = board.charAt(indexOfCell);
+    const solvedValue = solved.charAt(indexOfCell);
 
-    if (charAtIndex !== '.' && !mistakes.has(index)) return board;
+    if (charAtIndex !== '.' && !mistakes.has(indexOfCell)) return board;
 
     if (solvedValue !== key) throw Error();
 
@@ -36,29 +37,34 @@ const updateBoardFx = createEffect<UpdateBoardParams, Board>(
 
 sample({
   clock: [keyPressed, numberPressed],
-  source: { board: $board, index: $selectedCell },
-  fn: ({ board, index }, { key }) => board.substring(0, index) + key + board.substring(index + 1),
+  source: { board: $board, indexOfCell: $selectedCell },
+  fn: ({ board, indexOfCell }, { key }) => board.substring(0, indexOfCell) + key + board.substring(indexOfCell + 1),
   target: $updatedBoard,
 });
 
 sample({
   clock: [keyPressed, numberPressed],
-  source: { board: $board, solved: $solved, index: $selectedCell, updatedBoard: $updatedBoard, mistakes: $mistakes },
+  source: {
+    board: $board,
+    solved: $solved,
+    indexOfCell: $selectedCell,
+    updatedBoard: $updatedBoard,
+    mistakes: $mistakes,
+  },
   fn: (params, { key }) => ({ ...params, key }),
   target: updateBoardFx,
 });
 
 sample({
   clock: updateBoardFx.doneData,
-  source: { mistakes: $mistakes, index: $selectedCell },
-  filter: ({ mistakes, index }) => mistakes.has(index),
-  fn: ({ mistakes, index }) => new Set([...mistakes].filter((i) => i !== index)),
-  target: $mistakes,
+  source: { mistakes: $mistakes, indexOfCell: $selectedCell },
+  filter: cellHasMistake,
+  target: removeMistake,
 });
 
 sample({
   clock: updateBoardFx.failData,
-  source: { indexCell: $selectedCell },
+  source: { indexOfCell: $selectedCell },
   target: wrongCellClicked,
 });
 

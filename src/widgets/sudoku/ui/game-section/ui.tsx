@@ -33,13 +33,13 @@ export const GameSection = () => {
           {rows.map((row) => (
             <tr className="[&:nth-child(3n)]:border-b-[2px] [&:nth-child(3n)]:border-blue-900" key={row}>
               {rows.map((column) => {
-                const idxOfArray = row * 9 + column;
-                const value = grid[idxOfArray];
-                const isCellSelected = selectedCell === idxOfArray;
+                const indexOfCell = row * 9 + column;
+                const value = grid[indexOfCell];
+                const isCellSelected = selectedCell === indexOfCell;
                 const isRowSelected = selectedRow === row;
                 const isColumnSelected = selectedColumn === column;
                 const mistakesArray = [...mistakes];
-                const isError = mistakesArray.includes(idxOfArray);
+                const isError = mistakesArray.includes(indexOfCell);
 
                 return (
                   <Cell
@@ -47,8 +47,8 @@ export const GameSection = () => {
                     isHidden={!isRunning}
                     isCellSelected={isCellSelected}
                     isNeighbourOfSelected={isRowSelected || isColumnSelected}
-                    onSelect={() => cellSelected({ index: idxOfArray })}
-                    key={idxOfArray}
+                    onSelect={() => cellSelected({ indexOfCell })}
+                    key={indexOfCell}
                     value={value}
                   />
                 );
