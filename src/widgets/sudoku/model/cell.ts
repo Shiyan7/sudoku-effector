@@ -1,4 +1,5 @@
 import { createStore, createEvent, sample } from 'effector';
+import { newGameStarted } from './start';
 
 export const $selectedCell = createStore(0);
 export const $selectedRow = createStore(0);
@@ -22,3 +23,5 @@ sample({
   fn: (indexOfCell) => indexOfCell % 9,
   target: $selectedColumn,
 });
+
+$selectedCell.reset(newGameStarted);

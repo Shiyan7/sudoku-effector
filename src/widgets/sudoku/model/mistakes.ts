@@ -5,13 +5,14 @@ type cellHasMistakeParams = {
   indexOfCell: number;
 };
 
-export const $mistakes = createStore<Set<number>>(new Set());
-export const wrongCellClicked = createEvent<{ indexOfCell: number }>();
-export const removeMistake = createEvent<{ indexOfCell: number }>();
+const removeIndexFromSet = (set: Set<number>, index: number) => new Set([...set].filter((i) => i !== index));
 
-$mistakes.on(wrongCellClicked, (mistakes, { indexOfCell }) => new Set([...mistakes, indexOfCell]));
-$mistakes.on(removeMistake, (mistakes, { indexOfCell }) => {
-  mistakes.delete(indexOfCell);
-});
+const addIndexToSet = (set: Set<number>, index: number) => new Set([...set, index]);
 
 export const cellHasMistake = ({ mistakes, indexOfCell }: cellHasMistakeParams) => mistakes.has(indexOfCell);
+
+export const wrongCellClicked = createEvent<{ indexOfCell: number }>();
+export const removeMistake = createEvent<{ indexOfCell: number }>();
+export const $mistakes = createStore<Set<number>>(new Set())
+  .on(wrongCellClicked, (mistakes, { indexOfCell }) => addIndexToSet(mistakes, indexOfCell))
+  .on(removeMistake, (mistakes, { indexOfCell }) => removeIndexFromSet(mistakes, indexOfCell));

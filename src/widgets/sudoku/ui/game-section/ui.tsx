@@ -2,6 +2,7 @@ import { useUnit } from 'effector-react';
 import { sudokuModel } from '@/widgets/sudoku';
 import { timerModel } from '@/features/timer';
 import { Icon } from '@/shared/ui/icon';
+import { EMPTY_CELL, TABLE_COLS } from '@/shared/config';
 import { Cell } from './cell';
 
 export const GameSection = () => {
@@ -16,8 +17,8 @@ export const GameSection = () => {
     startTimer: timerModel.startTimer,
   });
 
-  const rows = Array.from({ length: 9 }, (_, v) => v);
-  const grid = board.split('').map((value) => (value === '.' ? 0 : parseInt(value)));
+  const rows = Array.from({ length: TABLE_COLS }, (_, v) => v);
+  const grid = board.split('').map((value) => (value === EMPTY_CELL ? 0 : parseInt(value)));
 
   return (
     <div className="relative">

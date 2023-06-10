@@ -3,7 +3,6 @@ import { reset } from 'patronum';
 import { createStore, createEvent, sample, forward } from 'effector';
 import { timerModel } from '@/features/timer';
 import { routes } from '@/shared/routing';
-import { $selectedCell } from './cell';
 
 export const $initBoard = createStore<Board>('');
 export const $board = createStore<Board>('');
@@ -36,5 +35,5 @@ forward({
 
 reset({
   clock: newGameStarted,
-  target: [$selectedCell, timerModel.$time],
+  target: timerModel.$time,
 });
