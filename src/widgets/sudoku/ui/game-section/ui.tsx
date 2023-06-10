@@ -5,14 +5,15 @@ import { Icon } from '@/shared/ui/icon';
 import { Cell } from './cell';
 
 export const GameSection = () => {
-  const { board, selectedCellIndex, cellSelected, isRunning, startTimer, selectedRow, selectedColumn } = useUnit({
+  const { board, selectedCell, cellSelected, selectedRow, selectedColumn, mistakes, isRunning, startTimer } = useUnit({
     board: sudokuModel.$board,
-    selectedCellIndex: sudokuModel.$selectedCellIndex,
+    selectedCell: sudokuModel.$selectedCell,
     cellSelected: sudokuModel.cellSelected,
-    isRunning: timerModel.isRunning,
-    startTimer: timerModel.startTimer,
     selectedRow: sudokuModel.$selectedRow,
     selectedColumn: sudokuModel.$selectedColumn,
+    mistakes: sudokuModel.$mistakes,
+    isRunning: timerModel.isRunning,
+    startTimer: timerModel.startTimer,
   });
 
   const rows = Array.from({ length: 9 }, (_, v) => v);
@@ -34,12 +35,14 @@ export const GameSection = () => {
               {rows.map((column) => {
                 const idxOfArray = row * 9 + column;
                 const value = grid[idxOfArray];
-                const isCellSelected = selectedCellIndex === idxOfArray;
+                const isCellSelected = selectedCell === idxOfArray;
                 const isRowSelected = selectedRow === row;
                 const isColumnSelected = selectedColumn === column;
+                const isError = mistakes.includes(idxOfArray);
 
                 return (
                   <Cell
+                    isError={isError}
                     isHidden={!isRunning}
                     isCellSelected={isCellSelected}
                     isNeighbourOfSelected={isRowSelected || isColumnSelected}

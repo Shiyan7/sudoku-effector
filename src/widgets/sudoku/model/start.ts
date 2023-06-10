@@ -3,7 +3,7 @@ import { reset } from 'patronum';
 import { createStore, createEvent, sample, forward } from 'effector';
 import { timerModel } from '@/features/timer';
 import { routes } from '@/shared/routing';
-import { $selectedCellIndex } from './cell';
+import { $selectedCell } from './cell';
 
 export const $initBoard = createStore('');
 export const $board = createStore('');
@@ -24,7 +24,7 @@ sample({
 });
 
 sample({
-  clock: $board,
+  clock: $initBoard,
   fn: (board) => sudoku.solve(board),
   target: $solved,
 });
@@ -36,5 +36,5 @@ forward({
 
 reset({
   clock: newGameStarted,
-  target: [$selectedCellIndex, timerModel.$time],
+  target: [$selectedCell, timerModel.$time],
 });

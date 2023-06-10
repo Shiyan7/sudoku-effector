@@ -6,8 +6,11 @@ import { $board, $initBoard, newGameStarted } from './start';
 
 export const gameOverToggler = createToggler();
 
-export const $mistakes = createStore(0);
+export const $countMistakes = createStore(0);
+export const $mistakes = createStore<number[]>([]);
+
 export const $isLoss = createStore(false);
+export const $isWin = createStore(false);
 
 export const newGameClicked = createEvent();
 export const secondChanceClicked = createEvent();
@@ -31,7 +34,7 @@ sample({
 });
 
 sample({
-  clock: $mistakes,
+  clock: $countMistakes,
   filter: (mistakes) => mistakes >= 3,
   fn: () => true,
   target: [$isLoss, gameOverToggler.open],
@@ -44,9 +47,9 @@ sample({
 
 sample({
   clock: secondChanceClicked,
-  source: $mistakes,
+  source: $countMistakes,
   fn: (mistakes) => mistakes - 1,
-  target: [gameOverToggler.close, $mistakes],
+  target: [gameOverToggler.close, $countMistakes],
 });
 
 reset({
@@ -56,5 +59,5 @@ reset({
 
 reset({
   clock: [startAgainClicked, newGameStarted],
-  target: $mistakes,
+  target: $countMistakes,
 });

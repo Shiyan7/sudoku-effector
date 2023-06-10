@@ -1,5 +1,5 @@
 export * from './start';
-export * from './controls';
+export * from './control';
 export * from './cell';
-export * from './mistakes';
+export * from './status';
 export * from './hotkey';
