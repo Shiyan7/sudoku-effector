@@ -1,13 +1,13 @@
 import { reset } from 'patronum';
-import { createEvent, createStore, sample } from 'effector';
+import { createEvent, createStore, forward, sample } from 'effector';
 import { difficultyModel } from '@/features/difficulty-selection';
 import { createToggler } from '@/shared/lib';
 import { $board, $initBoard, newGameStarted } from './start';
 
 export const gameOverToggler = createToggler();
 
+export const $mistakes = createStore<Set<number>>(new Set());
 export const $countMistakes = createStore(0);
-export const $mistakes = createStore<number[]>([]);
 
 export const $isLoss = createStore(false);
 export const $isWin = createStore(false);
@@ -16,6 +16,12 @@ export const newGameClicked = createEvent();
 export const secondChanceClicked = createEvent();
 export const cancelClicked = createEvent();
 export const startAgainClicked = createEvent();
+
+export const wrongCellClicked = createEvent<{ indexCell: number }>();
+
+$mistakes.on(wrongCellClicked, (state, payload) => new Set([...state, payload.indexCell]));
+
+$countMistakes.on(secondChanceClicked, (state) => state - 1);
 
 sample({
   clock: cancelClicked,
@@ -40,16 +46,14 @@ sample({
   target: [$isLoss, gameOverToggler.open],
 });
 
-sample({
-  clock: newGameClicked,
-  target: [gameOverToggler.close, difficultyModel.difficultyToggler.open],
+forward({
+  from: secondChanceClicked,
+  to: gameOverToggler.close,
 });
 
-sample({
-  clock: secondChanceClicked,
-  source: $countMistakes,
-  fn: (mistakes) => mistakes - 1,
-  target: [gameOverToggler.close, $countMistakes],
+forward({
+  from: newGameClicked,
+  to: [gameOverToggler.close, difficultyModel.difficultyToggler.open],
 });
 
 reset({
@@ -59,5 +63,5 @@ reset({
 
 reset({
   clock: [startAgainClicked, newGameStarted],
-  target: $countMistakes,
+  target: [$countMistakes, $mistakes],
 });

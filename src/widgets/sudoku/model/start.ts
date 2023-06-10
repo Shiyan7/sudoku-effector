@@ -5,9 +5,9 @@ import { timerModel } from '@/features/timer';
 import { routes } from '@/shared/routing';
 import { $selectedCell } from './cell';
 
-export const $initBoard = createStore('');
-export const $board = createStore('');
-export const $solved = createStore('');
+export const $initBoard = createStore<Board>('');
+export const $board = createStore<Board>('');
+export const $solved = createStore<Board>('');
 
 export const newGameStarted = createEvent();
 

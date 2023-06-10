@@ -38,7 +38,8 @@ export const GameSection = () => {
                 const isCellSelected = selectedCell === idxOfArray;
                 const isRowSelected = selectedRow === row;
                 const isColumnSelected = selectedColumn === column;
-                const isError = mistakes.includes(idxOfArray);
+                const mistakesArray = [...mistakes];
+                const isError = mistakesArray.includes(idxOfArray);
 
                 return (
                   <Cell
