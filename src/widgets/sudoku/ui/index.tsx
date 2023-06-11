@@ -11,10 +11,11 @@ import { GameOver } from './game-over';
 
 export const Sudoku = () => {
   const { open } = useToggler(difficultyModel.difficultyToggler);
-  const { cancelClicked, startAgainClicked, isLoss } = useUnit({
+  const { cancelClicked, startAgainClicked, isLoss, isWin } = useUnit({
     cancelClicked: sudokuModel.cancelClicked,
     startAgainClicked: sudokuModel.startAgainClicked,
     isLoss: sudokuModel.$isLoss,
+    isWin: sudokuModel.$isWin,
   });
 
   return (
@@ -23,8 +24,8 @@ export const Sudoku = () => {
       <div className="flex flex-col md:flex-row md:items-end">
         <GameSection />
         <div className="flex px-3 py-12 md:px-0 md:py-0 flex-col justify-evenly sm:ml-5 flex-grow">
-          <Actions />
-          <Controls />
+          <Actions disabled={isWin} />
+          <Controls disabled={isWin} />
           <Button onClick={open} className="hidden md:block w-full h-[60px]" variant="square">
             Новая игра
           </Button>

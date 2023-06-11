@@ -10,7 +10,11 @@ interface Action {
   handler: () => void;
 }
 
-export const Actions = () => {
+interface ActionsProps {
+  disabled: boolean;
+}
+
+export const Actions = ({ disabled }: ActionsProps) => {
   const { clearClicked, hintClicked } = useUnit({
     clearClicked: sudokuModel.clearClicked,
     hintClicked: sudokuModel.hintClicked,
@@ -27,11 +31,12 @@ export const Actions = () => {
     <div className="flex items-center justify-center md:justify-between w-full mb-12 md:mb-3">
       {items.map(({ hotkey, label, handler, iconName }) => (
         <button
+          disabled={disabled}
           title={hotkey}
           onClick={handler}
           key={label}
-          className="relative not-last:mr-9 md:not-last:mr-0 text-gray-400 md:text-blue-100">
-          <div className="flex items-center justify-center md:w-14 md:h-14 rounded-full md:bg-blue-400">
+          className="group relative not-last:mr-9 md:not-last:mr-0 text-gray-400 md:text-blue-100 disabled:pointer-events-none disabled:text-gray-300">
+          <div className="flex items-center justify-center md:w-14 md:h-14 rounded-full md:bg-blue-400 group-hover:bg-blue-500 transition-colors">
             <Icon className="flex w-8 h-8" name={iconName} />
           </div>
           <span className="text-[12px] leading-[12px] font-semibold">{label}</span>

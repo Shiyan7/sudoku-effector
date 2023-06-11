@@ -1,14 +1,15 @@
 import type { ButtonHTMLAttributes } from 'react';
 import { VariantProps, tv } from 'tailwind-variants';
 
-const base = 'inline-block h-[54px] rounded-full font-semibold px-14 text-[18px]';
+const base =
+  'inline-block h-[54px] rounded-full font-semibold px-14 text-[18px] hover:bg-[#0065c8] bg-blue-100 transition-colors';
 
 const buttonVariants = tv({
   base,
   variants: {
     variant: {
-      primary: 'bg-blue-100 text-white',
-      square: 'bg-blue-100 text-white rounded-md',
+      primary: 'text-white',
+      square: 'text-white rounded-md',
     },
   },
   defaultVariants: {

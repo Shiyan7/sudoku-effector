@@ -20,7 +20,10 @@ export const Winner = () => {
       <Flags />
       <h2 className="text-white text-3xl pt-[85px] mb-4 font-semibold">Отлично!</h2>
       <Stats />
-      <Button onClick={open} variant="square" className="bg-white text-blue-100 text-base h-[50px] px-12 mt-5">
+      <Button
+        onClick={open}
+        variant="square"
+        className="bg-white text-blue-100 text-base h-[50px] px-12 mt-5 hover:bg-[#f1f1f1]">
         Новая игра
       </Button>
     </div>

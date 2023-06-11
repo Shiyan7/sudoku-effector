@@ -8,9 +8,10 @@ import { difficultyItems } from '@/shared/config';
 import { Icon } from '@/shared/ui';
 
 export const Navbar = () => {
-  const { params, countMistakes } = useUnit({
+  const { params, countMistakes, isWin } = useUnit({
     params: routes.game.$params,
     countMistakes: sudokuModel.$countMistakes,
+    isWin: sudokuModel.$isWin,
   });
   const currentDifficulty = difficultyItems.find(({ type }) => type === params?.type);
 
@@ -43,7 +44,7 @@ export const Navbar = () => {
         </button>
       </div>
       <div className="text-blue-900 text-xs font-semibold">Ошибки: {countMistakes}/3</div>
-      <Timer />
+      <Timer disabled={isWin} />
     </div>
   );
 };
