@@ -39,8 +39,18 @@ module.exports = {
       },
       fontSize: {
         xs: '0.8rem',
-      }
+      },
     },
+    backgroundPosition: {
+      'flag-position-1': '.1261% 99.9641%',
+      'flag-position-2': '99.8961%98.761%',
+      'flag-position-3': '.1342% 89.0976%',
+    },
+    backgroundSize: {
+      'flag-size-1': '182.6041% 1049.3197%',
+      'flag-size-2': '221.8987% 1186.5384%',
+      'flag-size-3': '173.9087% 833.7837%',
+    }
   },
   plugins: [
     require('@tailwindcss/typography'),
