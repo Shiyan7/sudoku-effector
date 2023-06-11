@@ -48,5 +48,3 @@ sample({
   fn: findSegmentByIndexOfCell,
   target: $segment,
 });
-
-$selectedCell.reset(newGameStarted);

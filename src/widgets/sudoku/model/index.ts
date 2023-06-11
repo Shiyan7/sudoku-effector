@@ -6,3 +6,4 @@ export * from './hotkey';
 export * from './mistakes';
 export * from './start';
 export * from './status';
+export * from './reset';

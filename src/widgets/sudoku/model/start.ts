@@ -1,5 +1,4 @@
 import sudoku from 'sudoku.utils';
-import { reset } from 'patronum';
 import { createStore, createEvent, sample, forward } from 'effector';
 import { timerModel } from '@/features/timer';
 import { routes } from '@/shared/routing';
@@ -31,9 +30,4 @@ sample({
 forward({
   from: newGameStarted,
   to: [timerModel.stopTimer, timerModel.startTimer],
-});
-
-reset({
-  clock: newGameStarted,
-  target: timerModel.$time,
 });
