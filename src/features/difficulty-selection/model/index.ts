@@ -9,8 +9,6 @@ export const difficultyChosen = createEvent<{ type: string }>();
 
 export const $difficulty = createStore({ type: '' });
 
-export const $difficultyLabel = createStore('');
-
 sample({
   source: difficultyChosen,
   target: [$difficulty, difficultyToggler.close],

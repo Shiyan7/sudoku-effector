@@ -1,6 +1,6 @@
 import { createStore, createEvent, sample } from 'effector';
 import { interval } from 'patronum';
-import { formatTime } from './lib';
+import { formatTime } from '../lib';
 
 export const startTimer = createEvent();
 export const stopTimer = createEvent();
