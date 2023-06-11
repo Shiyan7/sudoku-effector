@@ -1,0 +1,1 @@
+export { Winner } from './ui';

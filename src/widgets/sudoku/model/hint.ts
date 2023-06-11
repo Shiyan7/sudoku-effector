@@ -1,9 +1,9 @@
-import { createEvent, createStore, sample } from 'effector';
+import { createEvent, sample } from 'effector';
+import { hotkey } from 'effector-hotkey';
 import { EMPTY_CELL } from '@/shared/config';
 import { $selectedCell } from './cell';
 import { $board, $solved } from './start';
 import { updateBoardWithKey } from '../lib';
-import { hotkey } from 'effector-hotkey';
 import { $mistakes } from './mistakes';
 
 export const hintClicked = createEvent();

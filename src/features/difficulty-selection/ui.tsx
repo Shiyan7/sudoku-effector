@@ -1,7 +1,7 @@
+import { useUnit } from 'effector-react';
 import { Modal } from '@/shared/ui/modal';
 import { useToggler } from '@/shared/lib';
 import { difficultyModel } from '@/features/difficulty-selection';
-import { useUnit } from 'effector-react';
 import { difficultyItems } from '@/shared/config';
 import { Icon, Title } from '@/shared/ui';
 
@@ -23,12 +23,12 @@ export const DifficultySelection = ({
 
   return (
     <Modal isOpen={isOpen} close={isClosable ? close : undefined}>
-      <div className="py-[20px] px-5 rounded-md bg-white overflow-hidden max-w-full w-[308px]">
+      <div className="py-[23px] px-5 rounded-md bg-white overflow-hidden max-w-full w-[340px]">
         <Title className="mb-1" size="md">
           Выберите режим игры
         </Title>
-        <p className="text-center text-[12px] text-gray-400">{description}</p>
-        <ul className="rounded-md overflow-hidden mt-4">
+        <p className="text-center text-xs text-gray-400">{description}</p>
+        <ul className="rounded-md overflow-hidden mt-5">
           {difficultyItems.map(({ type, label }) => (
             <li
               key={type}
@@ -37,16 +37,16 @@ export const DifficultySelection = ({
                   type,
                 })
               }
-              className="flex bg-blue-300 items-center cursor-pointer text-[15px] text-blue-100 not-last:border-b-[1px] not-last:border-b-[#e0e8f7] py-[8px] px-[15px] font-medium hover:bg-[#e4eaf1]">
-              <Icon className="w-[18px] h-[18px] mr-[10px]" name="common/sudoku" />
+              className="flex bg-blue-300 items-center cursor-pointer text-blue-100 not-last:border-b-[1px] not-last:border-b-[#e0e8f7] py-[10px] px-[15px] font-medium hover:bg-[#e4eaf1]">
+              <Icon className="w-[21px] h-[21px] mr-[10px]" name="common/sudoku" />
               {label}
             </li>
           ))}
           {onStartAgain && (
             <li
               onClick={onStartAgain}
-              className="flex bg-blue-300 items-center cursor-pointer text-[15px] text-blue-100 not-last:border-b-[1px] not-last:border-b-[#e0e8f7] py-[8px] px-[15px] font-medium hover:bg-[#e4eaf1]">
-              <Icon className="flex w-[21px] h-[21px] mr-[7px]" name="actions/cancel" />
+              className="flex bg-blue-300 items-center cursor-pointer text-[15px] text-blue-100 not-last:border-b-[1px] not-last:border-b-[#e0e8f7] py-[10px] px-[15px] font-medium hover:bg-[#e4eaf1]">
+              <Icon className="flex w-[24px] h-[24px] mr-[7px]" name="actions/cancel" />
               Начать заново
             </li>
           )}
@@ -55,7 +55,7 @@ export const DifficultySelection = ({
       {onCancel && (
         <button
           onClick={onCancel}
-          className="bg-white mt-[8px] rounded-md max-w-full w-[308px] text-blue-100 font-semibold h-[35px]">
+          className="bg-white mt-[8px] rounded-md max-w-full w-[340px] text-blue-100 font-semibold h-[40px]">
           Отмена
         </button>
       )}

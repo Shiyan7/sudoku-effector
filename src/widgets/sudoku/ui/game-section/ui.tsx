@@ -4,18 +4,22 @@ import { timerModel } from '@/features/timer';
 import { Icon } from '@/shared/ui/icon';
 import { EMPTY_CELL, TABLE_COLS } from '@/shared/config';
 import { Cell } from './cell';
+import { Winner } from '../winner';
+import clsx from 'clsx';
 
 export const GameSection = () => {
-  const { board, selectedCell, cellSelected, selectedRow, selectedColumn, mistakes, isRunning, startTimer } = useUnit({
-    board: sudokuModel.$board,
-    selectedCell: sudokuModel.$selectedCell,
-    cellSelected: sudokuModel.cellSelected,
-    selectedRow: sudokuModel.$selectedRow,
-    selectedColumn: sudokuModel.$selectedColumn,
-    mistakes: sudokuModel.$mistakes,
-    isRunning: timerModel.isRunning,
-    startTimer: timerModel.startTimer,
-  });
+  const { board, selectedCell, cellSelected, selectedRow, selectedColumn, mistakes, isRunning, startTimer, isWin } =
+    useUnit({
+      board: sudokuModel.$board,
+      selectedCell: sudokuModel.$selectedCell,
+      cellSelected: sudokuModel.cellSelected,
+      selectedRow: sudokuModel.$selectedRow,
+      selectedColumn: sudokuModel.$selectedColumn,
+      mistakes: sudokuModel.$mistakes,
+      isRunning: timerModel.isRunning,
+      startTimer: timerModel.startTimer,
+      isWin: sudokuModel.$isWin,
+    });
 
   const rows = Array.from({ length: TABLE_COLS }, (_, v) => v);
   const grid = board.split('').map((value) => (value === EMPTY_CELL ? 0 : parseInt(value)));
@@ -29,7 +33,8 @@ export const GameSection = () => {
           <Icon className="fill-white w-[21px] h-[21px]" name="common/play" />
         </button>
       )}
-      <table className="border-[2px] border-blue-900">
+      <Winner />
+      <table className={clsx('border-[2px] border-blue-900', isWin && 'opacity-0')}>
         <tbody>
           {rows.map((row) => (
             <tr className="[&:nth-child(3n)]:border-b-[2px] [&:nth-child(3n)]:border-blue-900" key={row}>

@@ -1,7 +1,7 @@
-import { useToggler } from '@/shared/lib';
-import { Button, Modal, Title } from '@/shared/ui';
 import { useUnit } from 'effector-react';
 import { sudokuModel } from '@/widgets/sudoku';
+import { useToggler } from '@/shared/lib';
+import { Button, Modal, Title } from '@/shared/ui';
 
 export const GameOver = () => {
   const { isOpen } = useToggler(sudokuModel.gameOverToggler);
@@ -12,7 +12,7 @@ export const GameOver = () => {
 
   return (
     <Modal isOpen={isOpen}>
-      <div className="py-6 px-7 pb-[32px] max-w-full w-[308px] rounded-md bg-white overflow-hidden">
+      <div className="py-6 px-7 pb-[32px] max-w-full w-[340px] rounded-md bg-white overflow-hidden">
         <Title className="mb-2" size="md">
           Игра окончена
         </Title>

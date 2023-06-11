@@ -2,8 +2,9 @@ import { reset } from 'patronum';
 import { createEvent, createStore, forward, sample } from 'effector';
 import { difficultyModel } from '@/features/difficulty-selection';
 import { createToggler } from '@/shared/lib';
-import { $board, $initBoard, newGameStarted } from './start';
+import { $board, $initBoard, $solved, newGameStarted } from './start';
 import { $mistakes } from './mistakes';
+import { timerModel } from '@/features/timer';
 
 export const gameOverToggler = createToggler();
 export const $countMistakes = createStore(0);
@@ -53,10 +54,18 @@ forward({
 
 reset({
   clock: [secondChanceClicked, startAgainClicked, newGameStarted],
-  target: $isLoss,
+  target: [$isLoss, $isWin],
 });
 
 reset({
   clock: [startAgainClicked, newGameStarted],
   target: [$countMistakes, $mistakes],
+});
+
+sample({
+  clock: $board,
+  source: $solved,
+  filter: (solved, board) => board === solved,
+  fn: () => true,
+  target: [$isWin, timerModel.stopTimer],
 });

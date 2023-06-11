@@ -8,6 +8,7 @@ module.exports = {
   },
   theme: {
     colors: {
+      'border-color': 'hsla(0, 0%, 100%, .2)',
       transparent: 'transparent',
       white: "#fff",
       black: "#000",
@@ -33,15 +34,19 @@ module.exports = {
       zIndex: {
         '1000': '1000',
       },
-      
-    fontSize: {
-      xs: '0.8rem',
-    }
+      backgroundImage: {
+        'custom-gradient': 'radial-gradient(circle at 50% 0, #82ffff, #0072e3 53%)',
+      },
+      fontSize: {
+        xs: '0.8rem',
+      }
     },
   },
   plugins: [
     require('@tailwindcss/typography'),
-    plugin(({ addVariant }) => {
+    plugin(({
+      addVariant
+    }) => {
       addVariant('not-last', '&:not(:last-child)');
     }),
   ],
