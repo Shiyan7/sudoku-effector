@@ -26,7 +26,8 @@ export const Stats = () => {
       {stats.map(({ label, icon, value }) => (
         <div
           className="flex w-60 items-center h-12 text-white not-last:border-b-[1px] not-last:border-b-border-color"
-          key={label}>
+          key={label}
+        >
           <Icon className="w-7 h-7 mr-3" name={icon} />
           <div className="flex items-center justify-between w-full">
             <span className="text-sm">{label}</span>

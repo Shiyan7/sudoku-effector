@@ -4,7 +4,7 @@ import { DifficultySelection, difficultyModel } from '@/features/difficulty-sele
 import { Button } from '@/shared/ui/button';
 import { useToggler } from '@/shared/lib';
 import { Actions } from './actions';
-import { GameSection } from './game-section';
+import { Board } from './board';
 import { Navbar } from './navbar';
 import { Controls } from './controls';
 import { GameOver } from './game-over';
@@ -22,7 +22,7 @@ export const Sudoku = () => {
     <>
       <Navbar />
       <div className="flex flex-col md:flex-row md:items-end">
-        <GameSection />
+        <Board />
         <div className="flex px-3 py-12 md:px-0 md:py-0 flex-col justify-evenly sm:ml-5 flex-grow">
           <Actions disabled={isWin} />
           <Controls disabled={isWin} />

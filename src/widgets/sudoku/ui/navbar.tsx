@@ -31,7 +31,8 @@ export const Navbar = () => {
                     isActive ? 'text-blue-100' : 'text-gray-400'
                   )}
                   to={routes.game}
-                  params={{ type }}>
+                  params={{ type }}
+                >
                   {label}
                 </Link>
               </li>

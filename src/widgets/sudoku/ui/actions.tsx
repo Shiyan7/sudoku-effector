@@ -35,7 +35,8 @@ export const Actions = ({ disabled }: ActionsProps) => {
           title={hotkey}
           onClick={handler}
           key={label}
-          className="group relative not-last:mr-9 md:not-last:mr-0 text-gray-400 md:text-blue-100 disabled:pointer-events-none disabled:text-gray-300">
+          className="group relative not-last:mr-9 md:not-last:mr-0 text-gray-400 md:text-blue-100 disabled:pointer-events-none disabled:text-gray-300"
+        >
           <div className="flex items-center justify-center md:w-14 md:h-14 rounded-full md:bg-blue-400 group-hover:bg-blue-500 transition-colors">
             <Icon className="flex w-8 h-8" name={iconName} />
           </div>

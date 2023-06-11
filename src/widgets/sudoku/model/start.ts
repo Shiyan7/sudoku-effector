@@ -14,6 +14,11 @@ forward({
   to: newGameStarted,
 });
 
+forward({
+  from: newGameStarted,
+  to: [timerModel.stopTimer, timerModel.startTimer],
+});
+
 sample({
   clock: newGameStarted,
   source: routes.game.$params,
@@ -25,9 +30,4 @@ sample({
   clock: $initBoard,
   fn: (board) => sudoku.solve(board),
   target: $solved,
-});
-
-forward({
-  from: newGameStarted,
-  to: [timerModel.stopTimer, timerModel.startTimer],
 });
