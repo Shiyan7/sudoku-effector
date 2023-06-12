@@ -16,8 +16,7 @@ export const Controls = ({ disabled }: ControlsProps) => {
           disabled={disabled}
           onClick={() => numberPressed({ key })}
           key={key}
-          className="rounded md:bg-blue-400 text-blue-100 text-4xl md:font-light md:py-5 disabled:text-gray-300 disabled:pointer-events-none hover:bg-blue-500 transition-colors"
-        >
+          className="rounded md:bg-blue-400 text-blue-100 text-4xl md:font-light md:py-5 disabled:text-gray-300 disabled:pointer-events-none md:hover:bg-blue-500 transition-colors">
           {key}
         </button>
       ))}
