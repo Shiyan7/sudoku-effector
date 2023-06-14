@@ -1,7 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { useEscape, useLockedBody } from './lib';
 import { Portal } from '@/shared/ui/portal';
-import clsx from 'clsx';
 
 interface ModalProps extends PropsWithChildren {
   isOpen: boolean;
@@ -18,12 +17,10 @@ export const Modal = ({ children, isOpen, close }: ModalProps) => {
       {isOpen && (
         <div
           className="fixed inset-x-0 inset-y-0 overflow-x-hidden overflow-y-auto text-center z-1000 before:content-[''] before:inline-block before:align-middle before:h-full before:sm:align-middle after:content-[''] after:block after:fixed after:inset-x-0 after:inset-y-0 after:cursor-pointer after:bg-black/70"
-          onClick={close}
-        >
+          onClick={close}>
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative z-10 mx-auto inline-flex items-center flex-col align-middle my-14 w-[85%] sm:w-auto"
-          >
+            className="relative z-10 mx-auto inline-flex items-center flex-col align-middle my-14 w-[85%] sm:w-auto">
             {children}
           </div>
         </div>
