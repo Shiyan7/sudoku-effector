@@ -1377,10 +1377,10 @@ effector-react@^22.5.1:
   dependencies:
     use-sync-external-store "^1.0.0"
 
-effector@^22.8.1:
-  version "22.8.1"
-  resolved "https://registry.yarnpkg.com/effector/-/effector-22.8.1.tgz#a1bac860262e8d4301d9462d5000973810319def"
-  integrity sha512-368ysZBxxqr0ThVYElhmo8p8rT2wTZ0hF/BIg1FxNPSIdr/wvw4Hbnioy22CbgtU5d53CnadkJnSlKqfOICOwg==
+effector@^22.8.6:
+  version "22.8.6"
+  resolved "https://registry.yarnpkg.com/effector/-/effector-22.8.6.tgz#254af8966ba52f9abe2a9db703ec0e9d424bcb8e"
+  integrity sha512-Bkg/rlPs7J4dmOFGPLLcL7X0SZeA8WdRnyC2X4tGVo7i6M8oxYwtNOkEUact/zIT/MgqTGm9A8T40dPnr8oXmA==
 
 electron-to-chromium@^1.4.284:
   version "1.4.368"
@@ -2445,6 +2445,13 @@ jsonc-parser@^3.2.0:
     array-includes "^3.1.5"
     object.assign "^4.1.3"
 
+killer-sudoku-generator@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/killer-sudoku-generator/-/killer-sudoku-generator-1.1.2.tgz#700665708c03ce29d4bad852967571af0303afa2"
+  integrity sha512-X254q1DwhyLDizduFhBp/Wi/Ypo1go6QfCjpkYMQt3wzn+sEmb9ezN+e3xS+PswkkeXvS8zai9g4rTNVvQYKFA==
+  dependencies:
+    sudoku-gen "^1.0.0"
+
 kind-of@^3.0.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
@@ -3360,10 +3367,10 @@ sucrase@^3.29.0:
     pirates "^4.0.1"
     ts-interface-checker "^0.1.9"
 
-sudoku.utils@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/sudoku.utils/-/sudoku.utils-0.1.2.tgz#313d086936e66006feaf443887b952a543aa7d73"
-  integrity sha512-ubKevJD6C6aNrjP99sy+EOKKRI4Lr5iD7NkbFGJimbICcGCZoAhh6LV9F9WApgHsoumJePPwL67Ow05FpTQsLw==
+sudoku-gen@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/sudoku-gen/-/sudoku-gen-1.0.2.tgz#17c5f3637047751121aec31647fcfcf9b7c223d4"
+  integrity sha512-zQFQNbar9qGpbteAH7CQShGoR5lk7r4KYlt0Wsvts1eVMzLb2EZUovzc7gAmoHp+HmXGYadmqCyyXoY7QVEyhA==
 
 supports-color@^5.3.0:
   version "5.5.0"

@@ -14,18 +14,18 @@ const keyPressed = hotkey({ key: keys });
 
 export const numberPressed = createEvent<{ key: string }>();
 
-export const $updatedBoard = createStore<Board>('');
+export const $updatedBoard = createStore('');
 
 type UpdateBoardParams = {
-  board: Board;
-  updatedBoard: Board;
-  solved: Board;
+  board: string;
+  updatedBoard: string;
+  solved: string;
   key: string;
   indexOfCell: number;
   mistakes: Set<number>;
 };
 
-const updateBoardFx = createEffect<UpdateBoardParams, Board>(
+const updateBoardFx = createEffect<UpdateBoardParams, string>(
   ({ board, solved, indexOfCell, key, updatedBoard, mistakes }) => {
     const charAtIndex = board.charAt(indexOfCell);
     const solvedValue = solved.charAt(indexOfCell);

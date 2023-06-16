@@ -8,12 +8,12 @@ import { $mistakes } from './mistakes';
 
 export const hintClicked = createEvent();
 
-function isCellEmptyOrMistake(board: Board, indexOfCell: number, mistakes: Set<number>) {
+function isCellEmptyOrMistake(board: string, indexOfCell: number, mistakes: Set<number>) {
   const charAtIndex = board.charAt(indexOfCell);
   return charAtIndex === EMPTY_CELL || mistakes.has(indexOfCell);
 }
 
-function getUpdatedBoard(board: Board, indexOfCell: number, solved: Board) {
+function getUpdatedBoard(board: string, indexOfCell: number, solved: string) {
   const solvedValue = solved.charAt(indexOfCell);
   return updateBoardWithKey(board, indexOfCell, solvedValue);
 }

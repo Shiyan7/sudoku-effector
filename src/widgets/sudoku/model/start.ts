@@ -1,12 +1,29 @@
-import sudoku from 'sudoku.utils';
-import { createStore, createEvent, sample, forward } from 'effector';
+import { createStore, createEvent, sample, forward, split } from 'effector';
+import { generateKillerSudoku } from 'killer-sudoku-generator';
+import { reshape } from 'patronum/reshape';
 import { timerModel } from '@/features/timer';
 import { routes } from '@/shared/routing';
 
-export const $initBoard = createStore<Board>('');
-export const $board = createStore<Board>('');
-export const $solved = createStore<Board>('');
+type Area = {
+  cells: Array<number[]>;
+  sum: number;
+};
 
+type Sudoku = {
+  puzzle: string;
+  solution: string;
+  difficulty: string;
+  areas: Area[];
+};
+
+const $sudoku = createStore<Sudoku>({
+  puzzle: '',
+  solution: '',
+  difficulty: 'easy',
+  areas: [],
+});
+
+export const $board = createStore('');
 export const newGameStarted = createEvent();
 
 forward({
@@ -22,12 +39,21 @@ forward({
 sample({
   clock: newGameStarted,
   source: routes.game.$params,
-  fn: ({ type }) => sudoku.generate(type),
-  target: [$board, $initBoard],
+  fn: ({ type }) => generateKillerSudoku(type),
+  target: $sudoku,
 });
 
 sample({
-  clock: $initBoard,
-  fn: (board) => sudoku.solve(board),
-  target: $solved,
+  clock: $sudoku,
+  fn: ({ puzzle }) => puzzle,
+  target: $board,
+});
+
+export const { $initBoard, $solved, $areas } = reshape({
+  source: $sudoku,
+  shape: {
+    $initBoard: (sudoku) => sudoku.puzzle,
+    $solved: (sudoku) => sudoku.solution,
+    $areas: (sudoku) => sudoku.areas,
+  },
 });
