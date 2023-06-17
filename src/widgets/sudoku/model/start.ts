@@ -5,7 +5,7 @@ import { timerModel } from '@/features/timer';
 import { routes } from '@/shared/routing';
 
 type Area = {
-  cells: Array<number[]>;
+  cells: Array<[number, number]>;
   sum: number;
 };
 

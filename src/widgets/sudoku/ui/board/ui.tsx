@@ -6,6 +6,7 @@ import { Icon } from '@/shared/ui/icon';
 import { EMPTY_CELL, TABLE_COLS } from '@/shared/config';
 import { Cell } from './cell';
 import { Winner } from '../winner';
+import { Areas } from './areas';
 
 export const Board = () => {
   const {
@@ -36,17 +37,17 @@ export const Board = () => {
   const grid = board.split('').map((value) => (value === EMPTY_CELL ? 0 : parseInt(value)));
 
   return (
-    <div className="relative">
+    <div className="asdasd relative">
       {!isRunning && (
         <button
           onClick={startTimer}
-          className="absolute z-10 left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 flex items-center justify-center rounded-full bg-blue-100 hover:bg-[#0065c8] text-white w-14 h-14"
-        >
+          className="absolute z-10 left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 flex items-center justify-center rounded-full bg-blue-100 hover:bg-[#0065c8] text-white w-14 h-14">
           <Icon className="fill-white w-[21px] h-[21px]" name="common/play" />
         </button>
       )}
       <Winner />
-      <table className={clsx('border-[2px] border-blue-900', isWin && 'opacity-0')}>
+      <Areas />
+      <table className={clsx('border-2 border-blue-900', isWin && 'opacity-0')}>
         <tbody>
           {rows.map((row) => (
             <tr key={row} className="[&:nth-child(3n)]:border-b-[2px] [&:nth-child(3n)]:border-blue-900">

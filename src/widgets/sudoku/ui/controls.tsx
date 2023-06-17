@@ -6,7 +6,7 @@ interface ControlsProps {
 }
 
 export const Controls = ({ disabled }: ControlsProps) => {
-  const numberPressed = useUnit(sudokuModel.numberPressed);
+  const { numberPressed } = useUnit({ numberPressed: sudokuModel.numberPressed });
   const numbers = Array.from({ length: 9 }, (_, v) => String(v + 1));
 
   return (

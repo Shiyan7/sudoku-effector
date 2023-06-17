@@ -9,7 +9,7 @@ import { Stats } from './stats';
 
 export const Winner = () => {
   const { open } = useToggler(difficultyModel.difficultyToggler);
-  const isWin = useUnit(sudokuModel.$isWin);
+  const { isWin } = useUnit({ isWin: sudokuModel.$isWin });
 
   return (
     <div
