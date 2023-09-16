@@ -11,6 +11,7 @@ import { GameOver } from './game-over';
 
 export const Sudoku = () => {
   const { open } = useToggler(difficultyModel.difficultyToggler);
+
   const { cancelClicked, startAgainClicked, isLoss, isWin } = useUnit({
     cancelClicked: sudokuModel.cancelClicked,
     startAgainClicked: sudokuModel.startAgainClicked,
