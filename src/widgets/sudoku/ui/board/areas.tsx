@@ -13,9 +13,7 @@ function calculatePosition(x: number, y: number) {
 }
 
 export const Areas = () => {
-  const { areas } = useUnit({
-    areas: sudokuModel.$areas,
-  });
+  const { areas } = useUnit({ areas: sudokuModel.$areas });
 
   return (
     <div className="absolute top-[4px] left-[4px] w-full h-full pointer-events-none">
@@ -43,7 +41,7 @@ export const Areas = () => {
                     borderLeft: hasCellLeft ? 'none' : '1.9px dashed #314b62',
                   }}>
                   {idx === 0 && (
-                    <span className="absolute top-[-3px] left-[-3px] p-[1px] text-[9px] leading-[9px] text-blue-900">
+                    <span className="absolute bg-white top-[-3px] left-[-3px] p-[1px] text-[9px] leading-[9px] text-blue-900">
                       {sum}
                     </span>
                   )}

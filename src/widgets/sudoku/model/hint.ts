@@ -1,5 +1,4 @@
 import { createEvent, sample } from 'effector';
-import { hotkey } from 'effector-hotkey';
 import { $selectedCell } from './cell';
 import { $board, $solved } from './start';
 import { isCellEmptyOrMistake, updateBoardWithKey } from '../lib';
@@ -9,6 +8,7 @@ export const hintClicked = createEvent();
 
 function getUpdatedBoard(board: string, indexOfCell: number, solved: string) {
   const solvedValue = solved.charAt(indexOfCell);
+
   return updateBoardWithKey({ board, indexOfCell, key: solvedValue });
 }
 
@@ -19,5 +19,3 @@ sample({
   fn: ({ board, indexOfCell, solved }) => getUpdatedBoard(board, indexOfCell, solved),
   target: $board,
 });
-
-hotkey({ key: 'Ctrl+v', target: hintClicked });

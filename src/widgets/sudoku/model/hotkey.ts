@@ -1,6 +1,12 @@
 import { hotkey } from 'effector-hotkey';
 import { TABLE_COLS, TABLE_SIZE } from '@/shared/config';
 import { $selectedCell } from './cell';
+import { hintClicked } from './hint';
+import { clearClicked } from './clear';
+
+hotkey({ key: 'Ctrl+v', target: hintClicked });
+
+hotkey({ key: 'Ctrl+x', target: clearClicked });
 
 const arrowUp = hotkey({ key: 'ArrowUp', type: 'keydown' });
 const arrowDown = hotkey({ key: 'ArrowDown', type: 'keydown' });

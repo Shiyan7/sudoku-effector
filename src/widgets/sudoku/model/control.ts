@@ -2,10 +2,10 @@ import { createEffect, createEvent, createStore, sample } from 'effector';
 import { hotkey } from 'effector-hotkey';
 import { $selectedCell } from './cell';
 import { $board, $solved } from './start';
-import { $mistakes, cellHasMistake, removeMistake, wrongCellClicked } from './mistakes';
 import { $countMistakes } from './status';
-import { updateBoard, updateBoardWithKey } from '../lib';
+import { cellHasMistake, updateBoardWithErrorHandling, updateBoardWithKey } from '../lib';
 import { hintClicked } from './hint';
+import { $mistakes, removeMistake, wrongCellClicked } from './mistakes';
 
 export const $updatedBoard = createStore<string>('');
 
@@ -19,7 +19,7 @@ export const numberPressed = createEvent<{ key: string }>();
 
 $key.on([keyPressed, numberPressed], (_, { key }) => key);
 
-const updateBoardFx = createEffect(updateBoard);
+const updateBoardFx = createEffect(updateBoardWithErrorHandling);
 
 sample({
   clock: [keyPressed, numberPressed],

@@ -2,9 +2,8 @@ import { createEvent, sample } from 'effector';
 import { EMPTY_CELL } from '@/shared/config';
 import { $selectedCell } from './cell';
 import { $board } from './start';
-import { $mistakes, cellHasMistake, removeMistake } from './mistakes';
-import { hotkey } from 'effector-hotkey';
-import { updateBoardWithKey } from '../lib';
+import { cellHasMistake, updateBoardWithKey } from '../lib';
+import { $mistakes, removeMistake } from './mistakes';
 
 export const clearClicked = createEvent();
 
@@ -22,5 +21,3 @@ sample({
   filter: cellHasMistake,
   target: removeMistake,
 });
-
-hotkey({ key: 'Ctrl+x', target: clearClicked });
