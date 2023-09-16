@@ -3,7 +3,7 @@ import { generateKillerSudoku } from 'killer-sudoku-generator';
 import { reshape } from 'patronum/reshape';
 import { timerModel } from '@/features/timer';
 import { routes } from '@/shared/routing';
-import { EMPTY_CELL } from '@/shared/config';
+import { DEFAULT_DIFFICULTY, EMPTY_CELL } from '@/shared/config';
 
 type Area = {
   cells: Array<[number, number]>;
@@ -20,7 +20,7 @@ type Sudoku = {
 const $sudoku = createStore<Sudoku>({
   puzzle: '',
   solution: '',
-  difficulty: 'easy',
+  difficulty: DEFAULT_DIFFICULTY,
   areas: [],
 });
 
