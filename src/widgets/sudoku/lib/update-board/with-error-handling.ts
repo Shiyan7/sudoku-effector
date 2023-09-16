@@ -3,7 +3,7 @@ import { isCellEmptyOrMistake } from '../is-cell';
 interface UpdateBoardWithErrorHandlingParams {
   board: string;
   updatedBoard: string;
-  solved: string;
+  solution: string;
   key: string;
   indexOfCell: number;
   mistakes: Set<number>;
@@ -11,13 +11,13 @@ interface UpdateBoardWithErrorHandlingParams {
 
 export function updateBoardWithErrorHandling({
   board,
-  solved,
+  solution,
   indexOfCell,
   key,
   updatedBoard,
   mistakes,
 }: UpdateBoardWithErrorHandlingParams) {
-  const solvedValue = solved.charAt(indexOfCell);
+  const solvedValue = solution.charAt(indexOfCell);
 
   const isEmptyOrMistake = isCellEmptyOrMistake({ board, indexOfCell, mistakes });
 

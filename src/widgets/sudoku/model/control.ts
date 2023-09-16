@@ -1,7 +1,7 @@
 import { createEffect, createEvent, createStore, sample } from 'effector';
 import { hotkey } from 'effector-hotkey';
 import { $selectedCell } from './cell';
-import { $board, $solved } from './start';
+import { $board, $solution } from './start';
 import { $countMistakes } from './status';
 import { cellHasMistake, updateBoardWithErrorHandling, updateBoardWithKey } from '../lib';
 import { hintClicked } from './hint';
@@ -34,7 +34,7 @@ sample({
     board: $board,
     indexOfCell: $selectedCell,
     updatedBoard: $updatedBoard,
-    solved: $solved,
+    solution: $solution,
     mistakes: $mistakes,
     key: $key,
   },

@@ -1,0 +1,13 @@
+import { updateBoardWithKey } from './with-key';
+
+interface UpdateBoardWithSolutionParams {
+  board: string;
+  indexOfCell: number;
+  solution: string;
+}
+
+export function updateBoardWithSolution({ board, indexOfCell, solution }: UpdateBoardWithSolutionParams) {
+  const solvedValue = solution.charAt(indexOfCell);
+
+  return updateBoardWithKey({ board, indexOfCell, key: solvedValue });
+}

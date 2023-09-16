@@ -57,11 +57,11 @@ sample({
   target: $grid,
 });
 
-export const { $initBoard, $solved, $areas } = reshape({
+export const { $initBoard, $solution, $areas } = reshape({
   source: $sudoku,
   shape: {
     $initBoard: (sudoku) => sudoku.puzzle,
-    $solved: (sudoku) => sudoku.solution,
+    $solution: (sudoku) => sudoku.solution,
     $areas: (sudoku) => sudoku.areas,
   },
 });
