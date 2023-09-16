@@ -16,7 +16,7 @@ export function updateBoardWithErrorHandling({
   key,
   updatedBoard,
   mistakes,
-}: UpdateBoardWithErrorHandlingParams) {
+}: UpdateBoardWithErrorHandlingParams): string {
   const solvedValue = solution.charAt(indexOfCell);
 
   const isEmptyOrMistake = isCellEmptyOrMistake({ board, indexOfCell, mistakes });

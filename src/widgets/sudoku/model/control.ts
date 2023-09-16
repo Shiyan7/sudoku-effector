@@ -3,9 +3,10 @@ import { hotkey } from 'effector-hotkey';
 import { $selectedCell } from './cell';
 import { $board, $solution } from './start';
 import { $countMistakes } from './status';
-import { cellHasMistake, updateBoardWithErrorHandling, updateBoardWithKey } from '../lib';
+import { isCellHasMistake, updateBoardWithErrorHandling, updateBoardWithKey } from '../lib';
 import { hintClicked } from './hint';
 import { $mistakes, removeMistake, wrongCellClicked } from './mistakes';
+import { clearClicked } from './clear';
 
 export const $updatedBoard = createStore<string>('');
 
@@ -42,9 +43,9 @@ sample({
 });
 
 sample({
-  clock: [updateBoardFx.doneData, hintClicked],
+  clock: [updateBoardFx.doneData, hintClicked, clearClicked],
   source: { mistakes: $mistakes, indexOfCell: $selectedCell },
-  filter: cellHasMistake,
+  filter: isCellHasMistake,
   target: removeMistake,
 });
 

@@ -4,6 +4,6 @@ interface UpdateBoardWithKeyParams {
   key: string;
 }
 
-export function updateBoardWithKey({ board, indexOfCell, key }: UpdateBoardWithKeyParams) {
+export function updateBoardWithKey({ board, indexOfCell, key }: UpdateBoardWithKeyParams): string {
   return board.substring(0, indexOfCell) + key + board.substring(indexOfCell + 1);
 }

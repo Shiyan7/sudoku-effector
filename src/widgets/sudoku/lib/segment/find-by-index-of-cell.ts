@@ -1,6 +1,6 @@
 import { SEGMENT_COLS, SEGMENT_SIZE, TABLE_COLS } from '@/shared/config';
 
-export function findSegmentByIndexOfCell(indexOfCell: number) {
+export function findSegmentByIndexOfCell(indexOfCell: number): number[] {
   const segment: number[] = [];
   const segmentRow = Math.floor(indexOfCell / SEGMENT_SIZE);
   const segmentCol = Math.floor((indexOfCell % TABLE_COLS) / SEGMENT_COLS);

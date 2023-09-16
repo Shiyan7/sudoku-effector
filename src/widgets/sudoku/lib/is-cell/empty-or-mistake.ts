@@ -1,4 +1,5 @@
 import { EMPTY_CELL } from '@/shared/config';
+import { isCellHasMistake } from './has-mistake';
 
 interface IsCellEmptyOrMistakeParams {
   board: string;
@@ -6,7 +7,12 @@ interface IsCellEmptyOrMistakeParams {
   mistakes: Set<number>;
 }
 
-export function isCellEmptyOrMistake({ board, indexOfCell, mistakes }: IsCellEmptyOrMistakeParams) {
+export function isCellEmptyOrMistake({ board, indexOfCell, mistakes }: IsCellEmptyOrMistakeParams): boolean {
+  const hasMistake = isCellHasMistake({ mistakes, indexOfCell });
+
   const charAtIndex = board.charAt(indexOfCell);
-  return charAtIndex === EMPTY_CELL || mistakes.has(indexOfCell);
+
+  const isEmpty = charAtIndex === EMPTY_CELL;
+
+  return isEmpty || hasMistake;
 }
