@@ -1,47 +1,30 @@
 import { createEffect, createEvent, createStore, sample } from 'effector';
 import { hotkey } from 'effector-hotkey';
-import { EMPTY_CELL } from '@/shared/config';
 import { $selectedCell } from './cell';
 import { $board, $solved } from './start';
 import { $mistakes, cellHasMistake, removeMistake, wrongCellClicked } from './mistakes';
 import { $countMistakes } from './status';
-import { updateBoardWithKey } from '../lib';
+import { updateBoard, updateBoardWithKey } from '../lib';
 import { hintClicked } from './hint';
+
+export const $updatedBoard = createStore<string>('');
+
+const $key = createStore<string>('');
 
 const keys = Array.from({ length: 9 }, (_, v) => v + 1).join('+');
 
-const keyPressed = hotkey({ key: keys });
+export const keyPressed = hotkey({ key: keys });
 
 export const numberPressed = createEvent<{ key: string }>();
 
-export const $updatedBoard = createStore('');
+$key.on([keyPressed, numberPressed], (_, { key }) => key);
 
-type UpdateBoardParams = {
-  board: string;
-  updatedBoard: string;
-  solved: string;
-  key: string;
-  indexOfCell: number;
-  mistakes: Set<number>;
-};
-
-const updateBoardFx = createEffect<UpdateBoardParams, string>(
-  ({ board, solved, indexOfCell, key, updatedBoard, mistakes }) => {
-    const charAtIndex = board.charAt(indexOfCell);
-    const solvedValue = solved.charAt(indexOfCell);
-
-    if (charAtIndex !== EMPTY_CELL && !mistakes.has(indexOfCell)) return board;
-
-    if (solvedValue !== key) throw Error();
-
-    return updatedBoard;
-  }
-);
+const updateBoardFx = createEffect(updateBoard);
 
 sample({
   clock: [keyPressed, numberPressed],
-  source: { board: $board, indexOfCell: $selectedCell },
-  fn: ({ board, indexOfCell }, { key }) => updateBoardWithKey(board, indexOfCell, key),
+  source: { board: $board, indexOfCell: $selectedCell, key: $key },
+  fn: updateBoardWithKey,
   target: $updatedBoard,
 });
 
@@ -53,8 +36,8 @@ sample({
     updatedBoard: $updatedBoard,
     solved: $solved,
     mistakes: $mistakes,
+    key: $key,
   },
-  fn: (params, { key }) => ({ ...params, key }),
   target: updateBoardFx,
 });
 

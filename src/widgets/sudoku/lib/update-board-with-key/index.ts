@@ -1,3 +1,9 @@
-export function updateBoardWithKey(board: string, index: number, key: string) {
-  return board.substring(0, index) + key + board.substring(index + 1);
+interface UpdateBoardWithKeyParams {
+  board: string;
+  indexOfCell: number;
+  key: string;
+}
+
+export function updateBoardWithKey({ board, indexOfCell, key }: UpdateBoardWithKeyParams) {
+  return board.substring(0, indexOfCell) + key + board.substring(indexOfCell + 1);
 }

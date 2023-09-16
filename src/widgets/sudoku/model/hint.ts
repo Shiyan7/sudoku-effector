@@ -1,27 +1,21 @@
 import { createEvent, sample } from 'effector';
 import { hotkey } from 'effector-hotkey';
-import { EMPTY_CELL } from '@/shared/config';
 import { $selectedCell } from './cell';
 import { $board, $solved } from './start';
-import { updateBoardWithKey } from '../lib';
+import { isCellEmptyOrMistake, updateBoardWithKey } from '../lib';
 import { $mistakes } from './mistakes';
 
 export const hintClicked = createEvent();
 
-function isCellEmptyOrMistake(board: string, indexOfCell: number, mistakes: Set<number>) {
-  const charAtIndex = board.charAt(indexOfCell);
-  return charAtIndex === EMPTY_CELL || mistakes.has(indexOfCell);
-}
-
 function getUpdatedBoard(board: string, indexOfCell: number, solved: string) {
   const solvedValue = solved.charAt(indexOfCell);
-  return updateBoardWithKey(board, indexOfCell, solvedValue);
+  return updateBoardWithKey({ board, indexOfCell, key: solvedValue });
 }
 
 sample({
   clock: hintClicked,
+  filter: isCellEmptyOrMistake,
   source: { board: $board, indexOfCell: $selectedCell, solved: $solved, mistakes: $mistakes },
-  filter: ({ board, indexOfCell, mistakes }) => isCellEmptyOrMistake(board, indexOfCell, mistakes),
   fn: ({ board, indexOfCell, solved }) => getUpdatedBoard(board, indexOfCell, solved),
   target: $board,
 });

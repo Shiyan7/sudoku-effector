@@ -3,15 +3,16 @@ import { useUnit } from 'effector-react';
 import { sudokuModel } from '@/widgets/sudoku';
 import { timerModel } from '@/features/timer';
 import { Icon } from '@/shared/ui/icon';
-import { EMPTY_CELL, TABLE_COLS } from '@/shared/config';
+import { TABLE_COLS } from '@/shared/config';
 import { Cell } from './cell';
 import { Winner } from '../winner';
 import { Areas } from './areas';
 
 export const Board = () => {
   const {
-    board,
+    grid,
     selectedCell,
+    selectedValue,
     segment,
     cellSelected,
     selectedRow,
@@ -22,7 +23,9 @@ export const Board = () => {
     isWin,
   } = useUnit({
     board: sudokuModel.$board,
+    grid: sudokuModel.$grid,
     selectedCell: sudokuModel.$selectedCell,
+    selectedValue: sudokuModel.$selectedValue,
     segment: sudokuModel.$segment,
     cellSelected: sudokuModel.cellSelected,
     selectedRow: sudokuModel.$selectedRow,
@@ -34,10 +37,9 @@ export const Board = () => {
   });
 
   const rows = Array.from({ length: TABLE_COLS }, (_, v) => v);
-  const grid = board.split('').map((value) => (value === EMPTY_CELL ? 0 : parseInt(value)));
 
   return (
-    <div className="asdasd relative">
+    <div className="relative">
       {!isRunning && (
         <button
           onClick={startTimer}
@@ -59,9 +61,11 @@ export const Board = () => {
                 const isColumnSelected = selectedColumn === column;
                 const isError = [...mistakes].includes(indexOfCell);
                 const isInSegment = segment.includes(indexOfCell);
+                const isSimilar = value === selectedValue;
 
                 return (
                   <Cell
+                    isSimilar={isSimilar}
                     isError={isError}
                     isHidden={!isRunning}
                     isCellSelected={isCellSelected}

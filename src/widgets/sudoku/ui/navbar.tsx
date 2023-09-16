@@ -13,6 +13,7 @@ export const Navbar = () => {
     countMistakes: sudokuModel.$countMistakes,
     isWin: sudokuModel.$isWin,
   });
+
   const currentDifficulty = difficultyItems.find(({ type }) => type === params?.type);
 
   return (
@@ -31,8 +32,7 @@ export const Navbar = () => {
                     isActive ? 'text-blue-100' : 'text-gray-400'
                   )}
                   to={routes.game}
-                  params={{ type }}
-                >
+                  params={{ type }}>
                   {label}
                 </Link>
               </li>

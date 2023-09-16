@@ -5,11 +5,20 @@ interface CellProps {
   isError: boolean;
   isCellSelected: boolean;
   isNeighbourOfSelected: boolean;
+  isSimilar: boolean;
   isHidden: boolean;
   onSelect: () => void;
 }
 
-export const Cell = ({ value, isCellSelected, isError, isNeighbourOfSelected, isHidden, onSelect }: CellProps) => {
+export const Cell = ({
+  value,
+  isSimilar,
+  isCellSelected,
+  isError,
+  isNeighbourOfSelected,
+  isHidden,
+  onSelect,
+}: CellProps) => {
   return (
     <td
       onClick={onSelect}
@@ -18,9 +27,9 @@ export const Cell = ({ value, isCellSelected, isError, isNeighbourOfSelected, is
         isNeighbourOfSelected && 'bg-[#e2ebf3]',
         isError && 'text-red bg-[#f7cfd6]',
         isCellSelected && '!bg-[#bbdefb]',
+        isSimilar && value && 'bg-[#c3d7ea]',
         isHidden && 'opacity-0'
-      )}
-    >
+      )}>
       {!!value && value}
     </td>
   );

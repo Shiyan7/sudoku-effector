@@ -10,9 +10,9 @@ export const clearClicked = createEvent();
 
 sample({
   clock: clearClicked,
-  source: { indexOfCell: $selectedCell, mistakes: $mistakes, board: $board },
   filter: cellHasMistake,
-  fn: ({ board, indexOfCell }) => updateBoardWithKey(board, indexOfCell, EMPTY_CELL),
+  source: { indexOfCell: $selectedCell, mistakes: $mistakes, board: $board },
+  fn: ({ board, indexOfCell }) => updateBoardWithKey({ board, indexOfCell, key: EMPTY_CELL }),
   target: $board,
 });
 

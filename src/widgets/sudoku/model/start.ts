@@ -1,8 +1,9 @@
-import { createStore, createEvent, sample, forward, split } from 'effector';
+import { createStore, createEvent, sample, forward } from 'effector';
 import { generateKillerSudoku } from 'killer-sudoku-generator';
 import { reshape } from 'patronum/reshape';
 import { timerModel } from '@/features/timer';
 import { routes } from '@/shared/routing';
+import { EMPTY_CELL } from '@/shared/config';
 
 type Area = {
   cells: Array<[number, number]>;
@@ -25,6 +26,7 @@ const $sudoku = createStore<Sudoku>({
 
 export const $board = createStore('');
 export const newGameStarted = createEvent();
+export const $grid = createStore<number[]>([]);
 
 forward({
   from: [routes.game.opened, routes.game.updated],
@@ -47,6 +49,12 @@ sample({
   clock: $sudoku,
   fn: ({ puzzle }) => puzzle,
   target: $board,
+});
+
+sample({
+  clock: $board,
+  fn: (board) => board.replaceAll(EMPTY_CELL, '0').split('').map(Number),
+  target: $grid,
 });
 
 export const { $initBoard, $solved, $areas } = reshape({
