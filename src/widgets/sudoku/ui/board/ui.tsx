@@ -36,7 +36,7 @@ export const Board = () => {
     isWin: sudokuModel.$isWin,
   });
 
-  const rows = Array.from({ length: TABLE_COLS }, (_, v) => v);
+  const rows = Array.from({ length: TABLE_COLS }, (_, idx) => idx);
 
   return (
     <div className="relative">

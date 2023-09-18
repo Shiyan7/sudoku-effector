@@ -21,6 +21,8 @@ export const Areas = () => {
         return (
           <div key={idx}>
             {cells.map(([x, y], idx) => {
+              const isFirstElement = idx === 0;
+
               const { left, top } = calculatePosition(y, x);
 
               const hasCellBelow = cells.some(([nextX, nextY]) => nextX === x + 1 && nextY === y);
@@ -40,7 +42,7 @@ export const Areas = () => {
                     borderTop: hasCellAbove ? 'none' : '1.9px dashed #314b62',
                     borderLeft: hasCellLeft ? 'none' : '1.9px dashed #314b62',
                   }}>
-                  {idx === 0 && (
+                  {isFirstElement && (
                     <span className="absolute bg-white top-[-3px] left-[-3px] p-[1px] text-[9px] leading-[9px] text-blue-900">
                       {sum}
                     </span>

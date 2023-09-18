@@ -1,4 +1,4 @@
-import { createStore, createEvent, sample, forward } from 'effector';
+import { createStore, createEvent, sample } from 'effector';
 import { generateKillerSudoku } from 'killer-sudoku-generator';
 import { reshape } from 'patronum/reshape';
 import { timerModel } from '@/features/timer';
@@ -28,14 +28,14 @@ export const $board = createStore('');
 export const newGameStarted = createEvent();
 export const $grid = createStore<number[]>([]);
 
-forward({
-  from: [routes.game.opened, routes.game.updated],
-  to: newGameStarted,
+sample({
+  clock: [routes.game.opened, routes.game.updated],
+  target: newGameStarted,
 });
 
-forward({
-  from: newGameStarted,
-  to: [timerModel.stopTimer, timerModel.startTimer],
+sample({
+  clock: newGameStarted,
+  target: [timerModel.stopTimer, timerModel.startTimer],
 });
 
 sample({
