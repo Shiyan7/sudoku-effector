@@ -18,15 +18,15 @@
     "effector-hotkey": "^0.2.3",
     "effector-react": "^22.5.1",
     "history": "^5.3.0",
-    "killer-sudoku-generator": "^1.1.2",
     "patronum": "^1.18.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sudoku-toolbox": "^1.1.5",
     "tailwind-variants": "^0.1.2",
     "tailwindcss": "^3.3.1"
   },
   "devDependencies": {
-    "@neodx/svg": "^0.2.0",
+    "@neodx/svg": "^0.5.1",
     "@tailwindcss/typography": "^0.5.9",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.1",

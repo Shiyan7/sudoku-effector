@@ -2,7 +2,8 @@ import { redirect } from 'atomic-router';
 import { createEvent, createStore, sample } from 'effector';
 import { createToggler } from '@/shared/lib';
 import { routes } from '@/shared/routing';
-import { DEFAULT_DIFFICULTY, Difficulty } from '@/shared/config';
+import { DEFAULT_DIFFICULTY } from '@/shared/config';
+import { Difficulty } from 'sudoku-toolbox/types';
 
 export const difficultyToggler = createToggler();
 

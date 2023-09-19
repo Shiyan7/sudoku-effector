@@ -1,4 +1,4 @@
-export type Difficulty = 'easy' | 'medium' | 'hard' | 'expert';
+import { Difficulty } from 'sudoku-toolbox/types';
 
 type DifficultyItem = {
   type: Difficulty;

@@ -1,23 +1,12 @@
 import { createStore, createEvent, sample } from 'effector';
-import { generateKillerSudoku } from 'killer-sudoku-generator';
 import { reshape } from 'patronum/reshape';
 import { timerModel } from '@/features/timer';
 import { routes } from '@/shared/routing';
 import { DEFAULT_DIFFICULTY, EMPTY_CELL } from '@/shared/config';
+import type { KillerSudoku } from 'sudoku-toolbox/types';
+import { generateKillerSudoku } from 'sudoku-toolbox';
 
-type Area = {
-  cells: Array<[number, number]>;
-  sum: number;
-};
-
-type Sudoku = {
-  puzzle: string;
-  solution: string;
-  difficulty: string;
-  areas: Area[];
-};
-
-const $sudoku = createStore<Sudoku>({
+const $sudoku = createStore<KillerSudoku>({
   puzzle: '',
   solution: '',
   difficulty: DEFAULT_DIFFICULTY,

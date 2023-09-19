@@ -1,4 +1,4 @@
-import { Difficulty } from './difficulty';
+import { Difficulty } from 'sudoku-toolbox/types';
 
 export const EMPTY_CELL = '-';
 export const SEGMENT_COLS = 3;

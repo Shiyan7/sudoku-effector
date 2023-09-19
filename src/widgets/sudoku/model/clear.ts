@@ -3,9 +3,12 @@ import { EMPTY_CELL } from '@/shared/config';
 import { $selectedCell } from './cell';
 import { $board } from './start';
 import { isCellHasMistake, updateBoardWithKey } from '../lib';
-import { $mistakes, removeMistake } from './mistakes';
+import { $mistakes } from './mistakes';
+import { hotkey } from 'effector-hotkey';
 
 export const clearClicked = createEvent();
+
+hotkey({ key: 'Ctrl+x', target: clearClicked });
 
 sample({
   clock: clearClicked,
