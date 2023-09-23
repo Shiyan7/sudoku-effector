@@ -12,6 +12,57 @@ function calculatePosition(x: number, y: number) {
   return { left: absoluteX, top: absoluteY };
 }
 
+function calculatePseudoElementStyle(
+  hasBorderTop: boolean,
+  hasBorderRight: boolean,
+  hasBorderBottom: boolean,
+  hasBorderLeft: boolean
+) {
+  const cellSize = 42;
+  const offset = 7;
+
+  const pseudoElementStyle = {
+    top: '0px',
+    right: '0px',
+    bottom: '0px',
+    left: '0px',
+    width: `${cellSize}px`,
+    height: `${cellSize}px`,
+  };
+
+  if (hasBorderTop) {
+    pseudoElementStyle.top = `-${offset}px`;
+    pseudoElementStyle.height = `${cellSize + offset}px`;
+  }
+
+  if (hasBorderRight) {
+    pseudoElementStyle.right = `-${offset}px`;
+    pseudoElementStyle.width = `${cellSize + offset}px`;
+  }
+
+  if (hasBorderBottom) {
+    pseudoElementStyle.bottom = `-${offset}px`;
+    pseudoElementStyle.height = `${cellSize + offset}px`;
+  }
+
+  if (hasBorderLeft) {
+    pseudoElementStyle.left = `-${offset}px`;
+    pseudoElementStyle.width = `${cellSize + offset}px`;
+  }
+
+  if (hasBorderTop && hasBorderBottom) {
+    pseudoElementStyle.top = `-${offset}px`;
+    pseudoElementStyle.height = `${cellSize + offset + offset}px`;
+  }
+
+  if (hasBorderLeft && hasBorderRight) {
+    pseudoElementStyle.left = `-${offset}px`;
+    pseudoElementStyle.width = `${cellSize + offset + offset}px`;
+  }
+
+  return pseudoElementStyle;
+}
+
 export const Areas = () => {
   const { areas } = useUnit({ areas: sudokuModel.$areas });
 
@@ -25,10 +76,17 @@ export const Areas = () => {
 
               const { left, top } = calculatePosition(y, x);
 
-              const hasCellBelow = cells.some(([nextX, nextY]) => nextX === x + 1 && nextY === y);
-              const hasCellRight = cells.some(([nextX, nextY]) => nextX === x && nextY === y + 1);
               const hasCellAbove = cells.some(([nextX, nextY]) => nextX === x - 1 && nextY === y);
+              const hasCellBelow = cells.some(([nextX, nextY]) => nextX === x + 1 && nextY === y);
               const hasCellLeft = cells.some(([nextX, nextY]) => nextX === x && nextY === y - 1);
+              const hasCellRight = cells.some(([nextX, nextY]) => nextX === x && nextY === y + 1);
+
+              const pseudoElementStyle = calculatePseudoElementStyle(
+                hasCellAbove,
+                hasCellRight,
+                hasCellBelow,
+                hasCellLeft
+              );
 
               return (
                 <div
@@ -37,13 +95,19 @@ export const Areas = () => {
                   style={{
                     top,
                     left,
-                    borderBottom: hasCellBelow ? 'none' : '1.9px dashed #314b62',
-                    borderRight: hasCellRight ? 'none' : '1.9px dashed #314b62',
-                    borderTop: hasCellAbove ? 'none' : '1.9px dashed #314b62',
-                    borderLeft: hasCellLeft ? 'none' : '1.9px dashed #314b62',
                   }}>
+                  <div
+                    className="absolute top-[0px] left-[0px]"
+                    style={{
+                      ...pseudoElementStyle,
+                      borderBottom: hasCellBelow ? 'none' : '1.9px dashed #314b62',
+                      borderRight: hasCellRight ? 'none' : '1.9px dashed #314b62',
+                      borderTop: hasCellAbove ? 'none' : '1.9px dashed #314b62',
+                      borderLeft: hasCellLeft ? 'none' : '1.9px dashed #314b62',
+                    }}
+                  />
                   {isFirstElement && (
-                    <span className="absolute bg-white top-[-3px] left-[-3px] p-[1px] text-[9px] leading-[9px] text-blue-900">
+                    <span className="absolute z-10 bg-white top-[-2px] left-[-2px] p-[1px] text-[9px] leading-[9px] text-blue-900">
                       {sum}
                     </span>
                   )}
