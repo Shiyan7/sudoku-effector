@@ -6,7 +6,7 @@ import { findSegmentByIndexOfCell } from '../lib';
 export const $selectedCell = createStore(0);
 export const $selectedRow = createStore(0);
 export const $selectedColumn = createStore(0);
-export const $selectedValue = createStore<number>(0);
+export const $selectedValue = createStore(0);
 export const $segment = createStore<number[]>([]);
 
 export const cellSelected = createEvent<{ indexOfCell: number }>();

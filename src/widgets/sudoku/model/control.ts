@@ -8,9 +8,9 @@ import { hintClicked } from './hint';
 import { $mistakes, removeMistake, wrongCellClicked } from './mistakes';
 import { clearClicked } from './clear';
 
-export const $updatedBoard = createStore<string>('');
+export const $updatedBoard = createStore('');
 
-const $key = createStore<string>('');
+const $key = createStore('');
 
 const keys = Array.from({ length: 9 }, (_, v) => v + 1).join('+');
 

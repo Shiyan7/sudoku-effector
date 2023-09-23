@@ -2,11 +2,11 @@ import { createStore, createEvent, sample } from 'effector';
 import { reshape } from 'patronum/reshape';
 import { timerModel } from '@/features/timer';
 import { routes } from '@/shared/routing';
-import { DEFAULT_DIFFICULTY, EMPTY_CELL } from '@/shared/config';
-import type { KillerSudoku } from 'sudoku-toolbox/types';
-import { generateKillerSudoku } from 'sudoku-toolbox';
+import { DEFAULT_DIFFICULTY } from '@/shared/config';
+import type { Sudoku } from 'sudoku-toolbox/types';
+import { generateSudoku } from 'sudoku-toolbox';
 
-const $sudoku = createStore<KillerSudoku>({
+const $sudoku = createStore<Sudoku>({
   puzzle: '',
   solution: '',
   difficulty: DEFAULT_DIFFICULTY,
@@ -30,7 +30,7 @@ sample({
 sample({
   clock: newGameStarted,
   source: routes.game.$params,
-  fn: ({ type }) => generateKillerSudoku(type),
+  fn: ({ type: difficulty }) => generateSudoku(difficulty),
   target: $sudoku,
 });
 
@@ -42,7 +42,7 @@ sample({
 
 sample({
   clock: $board,
-  fn: (board) => board.replaceAll(EMPTY_CELL, '0').split('').map(Number),
+  fn: (board) => board.split('').map(Number),
   target: $grid,
 });
 
