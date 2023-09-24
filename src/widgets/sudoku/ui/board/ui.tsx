@@ -7,6 +7,7 @@ import { TABLE_COLS } from '@/shared/config';
 import { Cell } from './cell';
 import { Winner } from '../winner';
 import { Areas } from './areas';
+import { useEffect, useRef, useState } from 'react';
 
 export const Board = () => {
   const {
@@ -38,8 +39,27 @@ export const Board = () => {
 
   const rows = Array.from({ length: TABLE_COLS }, (_, idx) => idx);
 
+  const [cellWidth, setCellWidth] = useState<number>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleResize = () => {
+    const containerSize = containerRef.current?.offsetWidth;
+    const cellWidth = (Number(containerSize) - 2) / 9;
+    setCellWidth(cellWidth);
+  };
+
+  useEffect(() => {
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
-    <div className="relative">
+    <div ref={containerRef} className="relative md:pb-0 pb-[100%]">
       {!isRunning && (
         <button
           onClick={startTimer}
@@ -48,8 +68,12 @@ export const Board = () => {
         </button>
       )}
       <Winner />
-      {isRunning && <Areas />}
-      <table className={clsx('border-2 border-blue-900', isWin && 'opacity-0')}>
+      {isRunning && <Areas cellWidth={cellWidth} />}
+      <table
+        className={clsx(
+          'md:static absolute top-0 left-0 w-full h-full border-2 border-blue-900',
+          isWin && 'opacity-0'
+        )}>
         <tbody>
           {rows.map((row) => (
             <tr key={row} className="[&:nth-child(3n)]:border-b-[2px] [&:nth-child(3n)]:border-blue-900">

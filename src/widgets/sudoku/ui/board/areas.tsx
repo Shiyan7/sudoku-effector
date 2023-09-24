@@ -2,10 +2,9 @@ import { useUnit } from 'effector-react';
 import { sudokuModel } from '@/widgets/sudoku';
 import { TABLE_COLS } from '@/shared/config';
 
-function calculatePosition(x: number, y: number) {
-  const cellSize = 48;
-  const cellX = x * cellSize;
-  const cellY = y * cellSize;
+function calculatePosition(x: number, y: number, cellWidth: number) {
+  const cellX = x * cellWidth;
+  const cellY = y * cellWidth;
   const absoluteX = (cellX / TABLE_COLS) * TABLE_COLS;
   const absoluteY = (cellY / TABLE_COLS) * TABLE_COLS;
 
@@ -16,9 +15,10 @@ function calculatePseudoElementStyle(
   hasBorderTop: boolean,
   hasBorderRight: boolean,
   hasBorderBottom: boolean,
-  hasBorderLeft: boolean
+  hasBorderLeft: boolean,
+  cellWidth: number
 ) {
-  const cellSize = 42;
+  const cellSize = cellWidth - 3 * 2;
   const offset = 7;
 
   const pseudoElementStyle = {
@@ -63,18 +63,22 @@ function calculatePseudoElementStyle(
   return pseudoElementStyle;
 }
 
-export const Areas = () => {
+interface AreasProps {
+  cellWidth: number;
+}
+
+export const Areas = ({ cellWidth }: AreasProps) => {
   const { areas } = useUnit({ areas: sudokuModel.$areas });
 
   return (
-    <div className="absolute top-[4px] left-[4px] w-full h-full pointer-events-none">
+    <div className="absolute z-10 top-[4px] left-[4px] w-full h-full pointer-events-none">
       {areas.map(({ cells, sum }, idx) => {
         return (
           <div key={idx}>
             {cells.map(([x, y], idx) => {
               const isFirstElement = idx === 0;
 
-              const { left, top } = calculatePosition(y, x);
+              const { left, top } = calculatePosition(y, x, cellWidth);
 
               const hasCellAbove = cells.some(([nextX, nextY]) => nextX === x - 1 && nextY === y);
               const hasCellBelow = cells.some(([nextX, nextY]) => nextX === x + 1 && nextY === y);
@@ -85,7 +89,8 @@ export const Areas = () => {
                 hasCellAbove,
                 hasCellRight,
                 hasCellBelow,
-                hasCellLeft
+                hasCellLeft,
+                cellWidth
               );
 
               return (
@@ -100,10 +105,10 @@ export const Areas = () => {
                     className="absolute top-[0px] left-[0px]"
                     style={{
                       ...pseudoElementStyle,
-                      borderBottom: hasCellBelow ? 'none' : '1.9px dashed #314b62',
-                      borderRight: hasCellRight ? 'none' : '1.9px dashed #314b62',
-                      borderTop: hasCellAbove ? 'none' : '1.9px dashed #314b62',
-                      borderLeft: hasCellLeft ? 'none' : '1.9px dashed #314b62',
+                      borderBottom: hasCellBelow ? 'none' : '1.5px dashed #314b62',
+                      borderRight: hasCellRight ? 'none' : '1.5px dashed #314b62',
+                      borderTop: hasCellAbove ? 'none' : '1.5px dashed #314b62',
+                      borderLeft: hasCellLeft ? 'none' : '1.5px dashed #314b62',
                     }}
                   />
                   {isFirstElement && (
