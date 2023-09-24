@@ -48,7 +48,7 @@ export const Board = () => {
         </button>
       )}
       <Winner />
-      <Areas />
+      {isRunning && <Areas />}
       <table className={clsx('border-2 border-blue-900', isWin && 'opacity-0')}>
         <tbody>
           {rows.map((row) => (

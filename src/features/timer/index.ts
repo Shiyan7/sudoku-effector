@@ -1,2 +1,2 @@
 export { Timer } from './ui';
-export * as timerModel from './model';
+export { timerModel } from './model';

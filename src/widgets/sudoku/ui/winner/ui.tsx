@@ -14,7 +14,7 @@ export const Winner = () => {
   return (
     <div
       className={clsx(
-        'absolute overflow-hidden flex flex-col items-center justify-center z-10 top-0 left-0 w-full h-full bg-custom-gradient rounded-xl',
+        'absolute overflow-hidden flex flex-col items-center justify-center z-50 top-0 left-0 w-full h-full bg-custom-gradient rounded-xl',
         isWin ? 'opacity-100 visible' : 'opacity-0 invisible'
       )}>
       <Flags />
