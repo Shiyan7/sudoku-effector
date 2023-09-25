@@ -1,33 +1,56 @@
-import sudoku from 'sudoku.utils';
-import { createStore, createEvent, sample, forward } from 'effector';
+import { createStore, createEvent, sample } from 'effector';
+import { reshape } from 'patronum/reshape';
 import { timerModel } from '@/features/timer';
 import { routes } from '@/shared/routing';
+import { DEFAULT_DIFFICULTY } from '@/shared/config';
+import type { Sudoku } from 'sudoku-toolbox/types';
+import { generateSudoku } from 'sudoku-toolbox';
 
-export const $initBoard = createStore<Board>('');
-export const $board = createStore<Board>('');
-export const $solved = createStore<Board>('');
-
-export const newGameStarted = createEvent();
-
-forward({
-  from: [routes.game.opened, routes.game.updated],
-  to: newGameStarted,
+const $sudoku = createStore<Sudoku>({
+  puzzle: '',
+  solution: '',
+  difficulty: DEFAULT_DIFFICULTY,
+  areas: [],
 });
 
-forward({
-  from: newGameStarted,
-  to: [timerModel.stopTimer, timerModel.startTimer],
+export const $board = createStore('');
+export const newGameStarted = createEvent();
+export const $grid = createStore<number[]>([]);
+
+sample({
+  clock: [routes.game.opened, routes.game.updated],
+  target: newGameStarted,
+});
+
+sample({
+  clock: newGameStarted,
+  target: [timerModel.stopTimer, timerModel.startTimer],
 });
 
 sample({
   clock: newGameStarted,
   source: routes.game.$params,
-  fn: ({ type }) => sudoku.generate(type),
-  target: [$board, $initBoard],
+  fn: ({ type: difficulty }) => generateSudoku(difficulty),
+  target: $sudoku,
 });
 
 sample({
-  clock: $initBoard,
-  fn: (board) => sudoku.solve(board),
-  target: $solved,
+  clock: $sudoku,
+  fn: ({ puzzle }) => puzzle,
+  target: $board,
+});
+
+sample({
+  clock: $board,
+  fn: (board) => board.split('').map(Number),
+  target: $grid,
+});
+
+export const { $initBoard, $solution, $areas } = reshape({
+  source: $sudoku,
+  shape: {
+    $initBoard: (sudoku) => sudoku.puzzle,
+    $solution: (sudoku) => sudoku.solution,
+    $areas: (sudoku) => sudoku.areas,
+  },
 });

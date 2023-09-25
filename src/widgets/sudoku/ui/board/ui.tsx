@@ -3,14 +3,17 @@ import { useUnit } from 'effector-react';
 import { sudokuModel } from '@/widgets/sudoku';
 import { timerModel } from '@/features/timer';
 import { Icon } from '@/shared/ui/icon';
-import { EMPTY_CELL, TABLE_COLS } from '@/shared/config';
+import { TABLE_COLS } from '@/shared/config';
 import { Cell } from './cell';
 import { Winner } from '../winner';
+import { Areas } from './areas';
+import { useEffect, useRef, useState } from 'react';
 
 export const Board = () => {
   const {
-    board,
+    grid,
     selectedCell,
+    selectedValue,
     segment,
     cellSelected,
     selectedRow,
@@ -21,7 +24,9 @@ export const Board = () => {
     isWin,
   } = useUnit({
     board: sudokuModel.$board,
+    grid: sudokuModel.$grid,
     selectedCell: sudokuModel.$selectedCell,
+    selectedValue: sudokuModel.$selectedValue,
     segment: sudokuModel.$segment,
     cellSelected: sudokuModel.cellSelected,
     selectedRow: sudokuModel.$selectedRow,
@@ -32,21 +37,43 @@ export const Board = () => {
     isWin: sudokuModel.$isWin,
   });
 
-  const rows = Array.from({ length: TABLE_COLS }, (_, v) => v);
-  const grid = board.split('').map((value) => (value === EMPTY_CELL ? 0 : parseInt(value)));
+  const rows = Array.from({ length: TABLE_COLS }, (_, idx) => idx);
+
+  const [cellWidth, setCellWidth] = useState<number>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleResize = () => {
+    const containerSize = containerRef.current?.offsetWidth;
+    const cellWidth = (Number(containerSize) - 2) / 9;
+    setCellWidth(cellWidth);
+  };
+
+  useEffect(() => {
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
-    <div className="relative">
+    <div ref={containerRef} className="relative md:pb-0 pb-[100%]">
       {!isRunning && (
         <button
           onClick={startTimer}
-          className="absolute z-10 left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 flex items-center justify-center rounded-full bg-blue-100 hover:bg-[#0065c8] text-white w-14 h-14"
-        >
+          className="absolute z-10 left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 flex items-center justify-center rounded-full bg-blue-100 hover:bg-[#0065c8] text-white w-14 h-14">
           <Icon className="fill-white w-[21px] h-[21px]" name="common/play" />
         </button>
       )}
       <Winner />
-      <table className={clsx('border-[2px] border-blue-900', isWin && 'opacity-0')}>
+      {isRunning && <Areas cellWidth={cellWidth} />}
+      <table
+        className={clsx(
+          'md:static absolute top-0 left-0 w-full h-full border-2 border-blue-900',
+          isWin && 'opacity-0'
+        )}>
         <tbody>
           {rows.map((row) => (
             <tr key={row} className="[&:nth-child(3n)]:border-b-[2px] [&:nth-child(3n)]:border-blue-900">
@@ -58,9 +85,11 @@ export const Board = () => {
                 const isColumnSelected = selectedColumn === column;
                 const isError = [...mistakes].includes(indexOfCell);
                 const isInSegment = segment.includes(indexOfCell);
+                const isSimilar = value === selectedValue;
 
                 return (
                   <Cell
+                    isSimilar={isSimilar}
                     isError={isError}
                     isHidden={!isRunning}
                     isCellSelected={isCellSelected}

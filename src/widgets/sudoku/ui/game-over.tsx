@@ -5,6 +5,7 @@ import { Button, Modal, Title } from '@/shared/ui';
 
 export const GameOver = () => {
   const { isOpen } = useToggler(sudokuModel.gameOverToggler);
+
   const { secondChanceClicked, newGameClicked } = useUnit({
     secondChanceClicked: sudokuModel.secondChanceClicked,
     newGameClicked: sudokuModel.newGameClicked,

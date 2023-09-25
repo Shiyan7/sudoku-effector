@@ -2,25 +2,19 @@ import { createEvent, sample } from 'effector';
 import { EMPTY_CELL } from '@/shared/config';
 import { $selectedCell } from './cell';
 import { $board } from './start';
-import { $mistakes, cellHasMistake, removeMistake } from './mistakes';
+import { isCellHasMistake, updateBoardWithKey } from '../lib';
+import { $mistakes } from './mistakes';
 import { hotkey } from 'effector-hotkey';
-import { updateBoardWithKey } from '../lib';
+import { timerModel } from '@/features/timer';
 
 export const clearClicked = createEvent();
 
+hotkey({ key: 'Ctrl+x', target: clearClicked, filter: timerModel.isRunning });
+
 sample({
   clock: clearClicked,
+  filter: isCellHasMistake,
   source: { indexOfCell: $selectedCell, mistakes: $mistakes, board: $board },
-  filter: cellHasMistake,
-  fn: ({ board, indexOfCell }) => updateBoardWithKey(board, indexOfCell, EMPTY_CELL),
+  fn: ({ board, indexOfCell }) => updateBoardWithKey({ board, indexOfCell, key: EMPTY_CELL }),
   target: $board,
 });
-
-sample({
-  clock: clearClicked,
-  source: { indexOfCell: $selectedCell, mistakes: $mistakes },
-  filter: cellHasMistake,
-  target: removeMistake,
-});
-
-hotkey({ key: 'Ctrl+x', target: clearClicked });

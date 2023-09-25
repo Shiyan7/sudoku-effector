@@ -1,47 +1,32 @@
 import { createEffect, createEvent, createStore, sample } from 'effector';
 import { hotkey } from 'effector-hotkey';
-import { EMPTY_CELL } from '@/shared/config';
 import { $selectedCell } from './cell';
-import { $board, $solved } from './start';
-import { $mistakes, cellHasMistake, removeMistake, wrongCellClicked } from './mistakes';
+import { $board, $solution } from './start';
 import { $countMistakes } from './status';
-import { updateBoardWithKey } from '../lib';
+import { isCellHasMistake, updateBoardWithErrorHandling, updateBoardWithKey } from '../lib';
 import { hintClicked } from './hint';
+import { $mistakes, removeMistake, wrongCellClicked } from './mistakes';
+import { clearClicked } from './clear';
+import { timerModel } from '@/features/timer';
+
+export const $updatedBoard = createStore('');
+
+const $key = createStore('');
 
 const keys = Array.from({ length: 9 }, (_, v) => v + 1).join('+');
 
-const keyPressed = hotkey({ key: keys });
+export const keyPressed = hotkey({ key: keys, filter: timerModel.isRunning });
 
 export const numberPressed = createEvent<{ key: string }>();
 
-export const $updatedBoard = createStore<Board>('');
+$key.on([keyPressed, numberPressed], (_, { key }) => key);
 
-type UpdateBoardParams = {
-  board: Board;
-  updatedBoard: Board;
-  solved: Board;
-  key: string;
-  indexOfCell: number;
-  mistakes: Set<number>;
-};
-
-const updateBoardFx = createEffect<UpdateBoardParams, Board>(
-  ({ board, solved, indexOfCell, key, updatedBoard, mistakes }) => {
-    const charAtIndex = board.charAt(indexOfCell);
-    const solvedValue = solved.charAt(indexOfCell);
-
-    if (charAtIndex !== EMPTY_CELL && !mistakes.has(indexOfCell)) return board;
-
-    if (solvedValue !== key) throw Error();
-
-    return updatedBoard;
-  }
-);
+const updateBoardFx = createEffect(updateBoardWithErrorHandling);
 
 sample({
   clock: [keyPressed, numberPressed],
-  source: { board: $board, indexOfCell: $selectedCell },
-  fn: ({ board, indexOfCell }, { key }) => updateBoardWithKey(board, indexOfCell, key),
+  source: { board: $board, indexOfCell: $selectedCell, key: $key },
+  fn: updateBoardWithKey,
   target: $updatedBoard,
 });
 
@@ -51,17 +36,17 @@ sample({
     board: $board,
     indexOfCell: $selectedCell,
     updatedBoard: $updatedBoard,
-    solved: $solved,
+    solution: $solution,
     mistakes: $mistakes,
+    key: $key,
   },
-  fn: (params, { key }) => ({ ...params, key }),
   target: updateBoardFx,
 });
 
 sample({
-  clock: [updateBoardFx.doneData, hintClicked],
+  clock: [updateBoardFx.doneData, hintClicked, clearClicked],
   source: { mistakes: $mistakes, indexOfCell: $selectedCell },
-  filter: cellHasMistake,
+  filter: isCellHasMistake,
   target: removeMistake,
 });
 

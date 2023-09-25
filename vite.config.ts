@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import svg from '@neodx/svg/vite';
+// import svg from '@neodx/svg/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
@@ -12,12 +12,12 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    svg({
+    /* svg({
       root: 'src/shared/ui/icon/assets',
       group: true,
       output: 'public/sprites',
       definitions: 'src/shared/ui/icon/sprite.h.ts',
-    }),
+    }), */
   ],
   server: {
     host: true,

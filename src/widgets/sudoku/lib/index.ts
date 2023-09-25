@@ -1,1 +1,3 @@
-export * from './update-board-with-key';
+export * from './segment';
+export * from './is-cell';
+export * from './update-board';

@@ -1,11 +1,12 @@
 import { createHistoryRouter, createRoute } from 'atomic-router';
 import { createBrowserHistory } from 'history';
 import { appStarted } from '@/shared/config';
+import { Difficulty } from 'sudoku-toolbox/types';
 import { sample } from 'effector';
 
 export const routes = {
   home: createRoute(),
-  game: createRoute<{ type: string }>(),
+  game: createRoute<{ type: Difficulty }>(),
 };
 
 export const routesMap = [

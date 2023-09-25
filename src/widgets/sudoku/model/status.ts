@@ -1,7 +1,7 @@
-import { createEvent, createStore, forward, sample } from 'effector';
+import { createEvent, createStore, sample } from 'effector';
 import { difficultyModel } from '@/features/difficulty-selection';
 import { createToggler } from '@/shared/lib';
-import { $board, $initBoard, $solved } from './start';
+import { $board, $initBoard, $solution } from './start';
 import { timerModel } from '@/features/timer';
 
 export const gameOverToggler = createToggler();
@@ -40,20 +40,20 @@ sample({
   target: [$isLoss, gameOverToggler.open],
 });
 
-forward({
-  from: secondChanceClicked,
-  to: gameOverToggler.close,
+sample({
+  clock: secondChanceClicked,
+  target: gameOverToggler.close,
 });
 
-forward({
-  from: newGameClicked,
-  to: [gameOverToggler.close, difficultyModel.difficultyToggler.open],
+sample({
+  clock: newGameClicked,
+  target: [gameOverToggler.close, difficultyModel.difficultyToggler.open],
 });
 
 sample({
   clock: $board,
-  source: $solved,
-  filter: (solved, board) => board === solved,
+  source: $solution,
+  filter: (solution, board) => board === solution,
   fn: () => true,
   target: [$isWin, timerModel.stopTimer],
 });

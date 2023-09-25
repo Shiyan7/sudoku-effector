@@ -19,7 +19,7 @@ export const DifficultySelection = ({
   isClosable = true,
 }: DifficultySelectionProps) => {
   const { isOpen, close } = useToggler(difficultyModel.difficultyToggler);
-  const difficultyChosen = useUnit(difficultyModel.difficultyChosen);
+  const { difficultyChosen } = useUnit({ difficultyChosen: difficultyModel.difficultyChosen });
 
   return (
     <Modal isOpen={isOpen} close={isClosable ? close : undefined}>
@@ -37,8 +37,7 @@ export const DifficultySelection = ({
                   type,
                 })
               }
-              className="flex bg-blue-300 items-center cursor-pointer text-blue-100 not-last:border-b-[1px] not-last:border-b-[#e0e8f7] py-[10px] px-[15px] font-medium hover:bg-[#e4eaf1] transition-colors"
-            >
+              className="flex bg-blue-300 items-center cursor-pointer text-blue-100 not-last:border-b-[1px] not-last:border-b-[#e0e8f7] py-[10px] px-[15px] font-medium hover:bg-[#e4eaf1] transition-colors">
               <Icon className="w-[21px] h-[21px] mr-[10px]" name="common/sudoku" />
               {label}
             </li>
@@ -46,8 +45,7 @@ export const DifficultySelection = ({
           {onStartAgain && (
             <li
               onClick={onStartAgain}
-              className="flex bg-blue-300 items-center cursor-pointer text-[15px] text-blue-100 not-last:border-b-[1px] not-last:border-b-[#e0e8f7] py-[10px] px-[15px] font-medium hover:bg-[#e4eaf1] transition-colors"
-            >
+              className="flex bg-blue-300 items-center cursor-pointer text-[15px] text-blue-100 not-last:border-b-[1px] not-last:border-b-[#e0e8f7] py-[10px] px-[15px] font-medium hover:bg-[#e4eaf1] transition-colors">
               <Icon className="flex w-[24px] h-[24px] mr-[7px]" name="actions/cancel" />
               Начать заново
             </li>
@@ -57,8 +55,7 @@ export const DifficultySelection = ({
       {onCancel && (
         <button
           onClick={onCancel}
-          className="bg-white mt-[8px] rounded-md max-w-full w-[340px] text-blue-100 font-semibold h-[40px]"
-        >
+          className="bg-white mt-[8px] rounded-md max-w-full w-[340px] text-blue-100 font-semibold h-[40px]">
           Отмена
         </button>
       )}
