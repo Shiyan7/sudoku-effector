@@ -2,6 +2,7 @@ import { createStore, createEvent, sample } from 'effector';
 import { $board, $grid, newGameStarted } from './start';
 import { TABLE_COLS } from '@/shared/config';
 import { findSegmentByIndexOfCell } from '../lib';
+import { timerModel } from '@/features/timer';
 
 export const $selectedCell = createStore(0);
 export const $selectedRow = createStore(0);
@@ -13,6 +14,7 @@ export const cellSelected = createEvent<{ indexOfCell: number }>();
 
 sample({
   clock: cellSelected,
+  filter: timerModel.isRunning,
   fn: ({ indexOfCell }) => indexOfCell,
   target: $selectedCell,
 });

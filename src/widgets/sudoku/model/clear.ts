@@ -5,10 +5,11 @@ import { $board } from './start';
 import { isCellHasMistake, updateBoardWithKey } from '../lib';
 import { $mistakes } from './mistakes';
 import { hotkey } from 'effector-hotkey';
+import { timerModel } from '@/features/timer';
 
 export const clearClicked = createEvent();
 
-hotkey({ key: 'Ctrl+x', target: clearClicked });
+hotkey({ key: 'Ctrl+x', target: clearClicked, filter: timerModel.isRunning });
 
 sample({
   clock: clearClicked,

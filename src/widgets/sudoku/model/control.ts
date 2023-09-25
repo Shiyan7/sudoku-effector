@@ -7,6 +7,7 @@ import { isCellHasMistake, updateBoardWithErrorHandling, updateBoardWithKey } fr
 import { hintClicked } from './hint';
 import { $mistakes, removeMistake, wrongCellClicked } from './mistakes';
 import { clearClicked } from './clear';
+import { timerModel } from '@/features/timer';
 
 export const $updatedBoard = createStore('');
 
@@ -14,7 +15,7 @@ const $key = createStore('');
 
 const keys = Array.from({ length: 9 }, (_, v) => v + 1).join('+');
 
-export const keyPressed = hotkey({ key: keys });
+export const keyPressed = hotkey({ key: keys, filter: timerModel.isRunning });
 
 export const numberPressed = createEvent<{ key: string }>();
 
