@@ -1,2 +1,2 @@
 export { DifficultySelection } from './ui';
-export * as difficultyModel from './model';
+export { difficultyModel } from './model';
