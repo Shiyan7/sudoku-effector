@@ -6,8 +6,12 @@ import { Timer } from '@/features/timer';
 import { routes } from '@/shared/routing';
 import { difficultyItems } from '@/shared/config';
 import { Icon } from '@/shared/ui';
+import { NavbarList } from './list';
+import { useState } from 'react';
 
 export const Navbar = () => {
+  const [isListOpen, setIsListOpen] = useState<boolean>(false);
+
   const { params, countMistakes, isWin } = useUnit({
     params: routes.game.$params,
     countMistakes: sudokuModel.$countMistakes,
@@ -17,7 +21,7 @@ export const Navbar = () => {
   const currentDifficulty = difficultyItems.find(({ type }) => type === params?.type);
 
   return (
-    <div className="flex px-2 md:px-0 items-center justify-between mb-3">
+    <div className="relative flex px-2 md:px-0 items-center justify-between mb-4">
       <div className="flex flex-col md:flex-row items-center">
         <span className="text-xs hidden md:block font-semibold mr-2 text-gray-300">Уровень:</span>
         <ul className="hidden md:flex items-center">
@@ -39,13 +43,16 @@ export const Navbar = () => {
             );
           })}
         </ul>
-        <button className="flex md:hidden items-center text-xs font-semibold text-gray-300">
+        <button
+          onClick={() => setIsListOpen(true)}
+          className="flex md:hidden items-center text-xs font-semibold text-gray-300">
           {currentDifficulty?.label}
           <Icon className="w-5 h-5 ml-1 rotate-[-90deg]" name="common/chevron" />
         </button>
       </div>
       <div className="text-blue-900 text-xs font-semibold">Ошибки: {countMistakes}/3</div>
       <Timer disabled={isWin} />
+      <NavbarList isOpen={isListOpen} close={() => setIsListOpen(false)} />
     </div>
   );
 };
