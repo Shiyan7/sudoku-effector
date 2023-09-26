@@ -10,9 +10,9 @@ interface IsCellEmptyOrMistakeParams {
 export function isCellEmptyOrMistake({ board, indexOfCell, mistakes }: IsCellEmptyOrMistakeParams): boolean {
   const hasMistake = isCellHasMistake({ mistakes, indexOfCell });
 
-  const charAtIndex = board.charAt(indexOfCell);
+  const cellValue = board[indexOfCell];
 
-  const isEmpty = charAtIndex === EMPTY_CELL;
+  const isEmpty = cellValue === EMPTY_CELL;
 
   return isEmpty || hasMistake;
 }

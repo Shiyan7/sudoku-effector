@@ -7,6 +7,7 @@ interface CellProps {
   isNeighbourOfSelected: boolean;
   isSimilar: boolean;
   isHidden: boolean;
+  isNewValue: boolean;
   onSelect: () => void;
 }
 
@@ -16,6 +17,7 @@ export const Cell = ({
   isCellSelected,
   isError,
   isNeighbourOfSelected,
+  isNewValue,
   isHidden,
   onSelect,
 }: CellProps) => {
@@ -23,11 +25,12 @@ export const Cell = ({
     <td
       onClick={onSelect}
       className={clsx(
-        'relative md:text-3xl text-2xl text-blue-900 font-light text-center border-[1px] border-blue-200 md:w-[48px] md:h-[48px] w-[auto] h-[auto] [&:nth-child(3n)]:border-r-[2px] [&:nth-child(3n)]:border-r-blue-900 select-none',
+        'relative md:text-3xl text-2xl font-light text-center border-[1px] border-blue-200 md:w-[48px] md:h-[48px] w-[auto] h-[auto] [&:nth-child(3n)]:border-r-[2px] [&:nth-child(3n)]:border-r-blue-900 select-none',
         isNeighbourOfSelected && 'bg-[#e2ebf3]',
-        isError && 'text-red bg-[#f7cfd6]',
         isCellSelected && '!bg-[#bbdefb]',
         isSimilar && value && 'bg-[#c3d7ea]',
+        isNewValue ? 'text-blue-100' : 'text-blue-900',
+        isError && 'text-red bg-[#f7cfd6]',
         isHidden && 'opacity-0'
       )}>
       <i className="opacity-0">0</i>

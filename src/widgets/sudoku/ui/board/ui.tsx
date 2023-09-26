@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from 'react';
 
 export const Board = () => {
   const {
+    initBoard,
     grid,
     selectedCell,
     selectedValue,
@@ -23,7 +24,7 @@ export const Board = () => {
     startTimer,
     isWin,
   } = useUnit({
-    board: sudokuModel.$board,
+    initBoard: sudokuModel.$initBoard,
     grid: sudokuModel.$grid,
     selectedCell: sudokuModel.$selectedCell,
     selectedValue: sudokuModel.$selectedValue,
@@ -86,12 +87,14 @@ export const Board = () => {
                 const isError = [...mistakes].includes(indexOfCell);
                 const isInSegment = segment.includes(indexOfCell);
                 const isSimilar = value === selectedValue;
+                const isNewValue = initBoard[indexOfCell] !== String(value);
 
                 return (
                   <Cell
                     isSimilar={isSimilar}
                     isError={isError}
                     isHidden={!isRunning}
+                    isNewValue={isNewValue}
                     isCellSelected={isCellSelected}
                     isNeighbourOfSelected={isRowSelected || isColumnSelected || isInSegment}
                     onSelect={() => cellSelected({ indexOfCell })}

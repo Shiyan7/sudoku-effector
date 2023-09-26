@@ -7,7 +7,7 @@ interface UpdateBoardWithSolutionParams {
 }
 
 export function updateBoardWithSolution({ board, indexOfCell, solution }: UpdateBoardWithSolutionParams): string {
-  const solvedValue = solution.charAt(indexOfCell);
+  const solvedValue = solution[indexOfCell];
 
   return updateBoardWithKey({ board, indexOfCell, key: solvedValue });
 }

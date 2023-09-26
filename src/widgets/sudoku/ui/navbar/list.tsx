@@ -1,6 +1,5 @@
 import { difficultyItems } from '@/shared/config';
 import { routes } from '@/shared/routing';
-import { Icon } from '@/shared/ui';
 import { Link } from 'atomic-router-react';
 import clsx from 'clsx';
 import { useUnit } from 'effector-react';
@@ -15,12 +14,13 @@ export const NavbarList = ({ isOpen, close }: NavbarListProps) => {
     params: routes.game.$params,
   });
 
-  if (!isOpen) return null;
-
   return (
     <>
-      <div className="absolute top-9 z-[1001] -left-0.5">
-        <Icon className="absolute fill-white z-10 w-8 h-4 -top-4 left-1/2 -translate-x-1/2" name="common/subtract" />
+      <div
+        className={clsx(
+          'absolute top-7 z-[1001] left-3 transition-transform origin-top-left',
+          isOpen ? 'scale-100' : 'scale-0'
+        )}>
         <ul className="flex flex-col gap-1 py-1 bg-white rounded-md drop-shadow-[0_15px_30px_rgba(0,0,0,0.25)]">
           {difficultyItems.map(({ type, label }) => {
             const isActive = type === params.type;
@@ -42,7 +42,13 @@ export const NavbarList = ({ isOpen, close }: NavbarListProps) => {
           })}
         </ul>
       </div>
-      <div onClick={close} className="fixed top-0 left-0 bg-black/50 w-full h-full z-[1000]" />
+      <div
+        onClick={close}
+        className={clsx(
+          'fixed top-0 left-0 bg-black/50 w-full h-full z-[1000] transition-all',
+          isOpen ? 'opacity-1 visible' : 'opacity-0 invisible'
+        )}
+      />
     </>
   );
 };

@@ -47,7 +47,10 @@ export const Navbar = () => {
           onClick={() => setIsListOpen(true)}
           className="flex md:hidden items-center text-xs font-semibold text-gray-300">
           {currentDifficulty?.label}
-          <Icon className="w-5 h-5 ml-1 rotate-[-90deg]" name="common/chevron" />
+          <Icon
+            className={clsx('w-5 h-5 ml-1 transition-transform duration-300', isListOpen ? 'rotate-90' : '-rotate-90')}
+            name="common/chevron"
+          />
         </button>
       </div>
       <div className="text-blue-900 text-xs font-semibold">Ошибки: {countMistakes}/3</div>
