@@ -22,19 +22,19 @@ sample({
   fn: ({ arrayOfNotes, indexOfCell, newNote }) => {
     const cellNotes = arrayOfNotes[indexOfCell];
 
-    const cellHasNotes = cellNotes.has(newNote);
+    const cellHasNote = cellNotes.has(newNote);
 
-    if (cellHasNotes) {
-      cellNotes.delete(newNote);
-
-      return [...arrayOfNotes];
-    } else {
+    if (!cellHasNote) {
       return arrayOfNotes.map((notes, idx) => {
         const isTargetNote = idx === indexOfCell;
         const newNotes = new Set([...notes, newNote]);
 
         return isTargetNote ? newNotes : notes;
       });
+    } else {
+      cellNotes.delete(newNote);
+
+      return [...arrayOfNotes];
     }
   },
   target: $arrayOfNotes,

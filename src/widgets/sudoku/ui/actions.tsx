@@ -6,7 +6,6 @@ import clsx from 'clsx';
 import { ReactNode } from 'react';
 
 interface Action {
-  hotkey: string;
   label: string;
   chip?: ReactNode;
   iconName: IconName;
@@ -36,18 +35,17 @@ export const Actions = ({ disabled }: ActionsProps) => {
   );
 
   const items: Action[] = [
-    { hotkey: 'Ctrl+Z', label: 'Отменить', handler: () => console.log('Отменить'), iconName: 'actions/cancel' },
-    { hotkey: 'Ctrl+X', label: 'Очистить', handler: clearClicked, iconName: 'actions/clear' },
-    { hotkey: 'Ctrl+N', label: 'Заметки', handler: toggleNotesClicked, iconName: 'actions/pen', chip: NotesChip },
-    { hotkey: 'Ctrl+V', label: 'Подсказка', handler: hintClicked, iconName: 'actions/bulb' },
+    { label: 'Отменить', handler: () => console.log('Отменить'), iconName: 'actions/cancel' },
+    { label: 'Очистить', handler: clearClicked, iconName: 'actions/clear' },
+    { label: 'Заметки', handler: toggleNotesClicked, iconName: 'actions/pen', chip: NotesChip },
+    { label: 'Подсказка', handler: hintClicked, iconName: 'actions/bulb' },
   ];
 
   return (
     <div className="flex items-center justify-center md:justify-between w-full mb-12 md:mb-3">
-      {items.map(({ chip, hotkey, label, handler, iconName }) => (
+      {items.map(({ chip, label, handler, iconName }) => (
         <button
           disabled={disabled}
-          title={hotkey}
           onClick={handler}
           key={label}
           className="group cursor-default lg:cursor-pointer relative not-last:mr-9 md:not-last:mr-0 text-gray-400 md:text-blue-100 disabled:pointer-events-none disabled:text-gray-300">

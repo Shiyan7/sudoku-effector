@@ -10,8 +10,6 @@ import { $arrayOfNotes, cellNotesUpdated } from './notes';
 
 export const clearClicked = createEvent();
 
-hotkey({ key: 'Ctrl+x', target: clearClicked, filter: timerModel.isRunning });
-
 sample({
   clock: [clearClicked, cellNotesUpdated],
   filter: isCellHasMistake,

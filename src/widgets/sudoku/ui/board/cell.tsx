@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { v4 as uuid } from 'uuid';
 
 interface CellProps {
   value: number;
@@ -28,7 +27,7 @@ export const Cell = ({
     const index = idx + 1;
 
     return [...notesOfCell].includes(index) ? index : null;
-  }).map((value) => ({ id: uuid(), value }));
+  });
 
   return (
     <td
@@ -50,9 +49,9 @@ export const Cell = ({
       </span>
       {!value && (
         <div className="absolute grid p-1 pt-2.5 grid-cols-3 top-0 left-0 w-full h-full">
-          {notes.map(({ id, value }) => (
-            <span key={id} className="relative flex items-center opacity-60">
-              <span className="absolute top-0 left-0 w-full h-full text-[9px] leading-none font-normal">{value}</span>
+          {notes.map((note, idx) => (
+            <span key={idx} className="relative flex items-center opacity-60">
+              <span className="absolute top-0 left-0 w-full h-full text-[9px] leading-none font-normal">{note}</span>
             </span>
           ))}
         </div>
