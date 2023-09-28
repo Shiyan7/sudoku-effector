@@ -8,6 +8,8 @@ import { hintClicked } from './hint';
 import { $mistakes, removeMistake, wrongCellClicked } from './mistakes';
 import { clearClicked } from './clear';
 import { timerModel } from '@/features/timer';
+import { not } from 'patronum';
+import { $isNotesEnabled, updateNoteCell } from './notes';
 
 export const $updatedBoard = createStore('');
 
@@ -25,6 +27,7 @@ const updateBoardFx = createEffect(updateBoardWithErrorHandling);
 
 sample({
   clock: [keyPressed, numberPressed],
+  filter: not($isNotesEnabled),
   source: { board: $board, indexOfCell: $selectedCell, key: $key },
   fn: updateBoardWithKey,
   target: $updatedBoard,
@@ -32,6 +35,7 @@ sample({
 
 sample({
   clock: [keyPressed, numberPressed],
+  filter: not($isNotesEnabled),
   source: {
     board: $board,
     indexOfCell: $selectedCell,
@@ -44,7 +48,13 @@ sample({
 });
 
 sample({
-  clock: [updateBoardFx.doneData, hintClicked, clearClicked],
+  clock: [keyPressed, numberPressed],
+  filter: $isNotesEnabled,
+  target: updateNoteCell,
+});
+
+sample({
+  clock: [updateBoardFx.doneData, hintClicked, clearClicked, updateNoteCell],
   source: { mistakes: $mistakes, indexOfCell: $selectedCell },
   filter: isCellHasMistake,
   target: removeMistake,

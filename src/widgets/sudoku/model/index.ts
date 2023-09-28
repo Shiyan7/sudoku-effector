@@ -4,6 +4,7 @@ export * from './control';
 export * from './hint';
 export * from './hotkey';
 export * from './mistakes';
+export * from './notes';
 export * from './start';
 export * from './status';
 export * from './reset';

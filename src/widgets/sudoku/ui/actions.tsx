@@ -2,10 +2,13 @@ import { Icon } from '@/shared/ui';
 import type { IconName } from '@/shared/ui/icon';
 import { useUnit } from 'effector-react';
 import { sudokuModel } from '@/widgets/sudoku';
+import clsx from 'clsx';
+import { ReactNode } from 'react';
 
 interface Action {
   hotkey: string;
   label: string;
+  chip?: ReactNode;
   iconName: IconName;
   handler: () => void;
 }
@@ -15,27 +18,40 @@ interface ActionsProps {
 }
 
 export const Actions = ({ disabled }: ActionsProps) => {
-  const { clearClicked, hintClicked } = useUnit({
+  const { isNotesEnabled, toggleNotesClicked, clearClicked, hintClicked } = useUnit({
+    isNotesEnabled: sudokuModel.$isNotesEnabled,
+    toggleNotesClicked: sudokuModel.toggleNotesClicked,
     clearClicked: sudokuModel.clearClicked,
     hintClicked: sudokuModel.hintClicked,
   });
 
+  const NotesChip = (
+    <span
+      className={clsx(
+        'flex items-center justify-center rounded-full w-9 h-6 uppercase text-xs leading-none tracking-wider text-white font-bold transition-colors',
+        isNotesEnabled ? 'bg-blue-100 ' : 'bg-[#adb6c2]'
+      )}>
+      {isNotesEnabled ? 'On' : 'Off'}
+    </span>
+  );
+
   const items: Action[] = [
     { hotkey: 'Ctrl+Z', label: 'Отменить', handler: () => console.log('Отменить'), iconName: 'actions/cancel' },
     { hotkey: 'Ctrl+X', label: 'Очистить', handler: clearClicked, iconName: 'actions/clear' },
-    { hotkey: 'Ctrl+N', label: 'Заметки', handler: () => console.log('Заметки'), iconName: 'actions/pen' },
+    { hotkey: 'Ctrl+N', label: 'Заметки', handler: toggleNotesClicked, iconName: 'actions/pen', chip: NotesChip },
     { hotkey: 'Ctrl+V', label: 'Подсказка', handler: hintClicked, iconName: 'actions/bulb' },
   ];
 
   return (
     <div className="flex items-center justify-center md:justify-between w-full mb-12 md:mb-3">
-      {items.map(({ hotkey, label, handler, iconName }) => (
+      {items.map(({ chip, hotkey, label, handler, iconName }) => (
         <button
           disabled={disabled}
           title={hotkey}
           onClick={handler}
           key={label}
-          className="group relative not-last:mr-9 md:not-last:mr-0 text-gray-400 md:text-blue-100 disabled:pointer-events-none disabled:text-gray-300">
+          className="group cursor-default lg:cursor-pointer relative not-last:mr-9 md:not-last:mr-0 text-gray-400 md:text-blue-100 disabled:pointer-events-none disabled:text-gray-300">
+          {chip && <span className="absolute -top-2.5 -right-3 border-white border-2 rounded-full">{chip}</span>}
           <div className="flex items-center justify-center md:w-14 md:h-14 rounded-full md:bg-blue-400 md:group-hover:bg-blue-500 transition-colors">
             <Icon className="flex w-8 h-8 fill-current" name={iconName} />
           </div>

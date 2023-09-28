@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from 'react';
 export const Board = () => {
   const {
     initBoard,
+    notes,
     grid,
     selectedCell,
     selectedValue,
@@ -25,6 +26,7 @@ export const Board = () => {
     isWin,
   } = useUnit({
     initBoard: sudokuModel.$initBoard,
+    notes: sudokuModel.$notes,
     grid: sudokuModel.$grid,
     selectedCell: sudokuModel.$selectedCell,
     selectedValue: sudokuModel.$selectedValue,
@@ -88,9 +90,11 @@ export const Board = () => {
                 const isInSegment = segment.includes(indexOfCell);
                 const isSimilar = value === selectedValue;
                 const isNewValue = initBoard[indexOfCell] !== String(value);
+                const notesOfCell = notes[indexOfCell];
 
                 return (
                   <Cell
+                    notesOfCell={notesOfCell}
                     isSimilar={isSimilar}
                     isError={isError}
                     isHidden={!isRunning}

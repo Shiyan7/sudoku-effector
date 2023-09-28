@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { v4 as uuid } from 'uuid';
 
 interface CellProps {
   value: number;
@@ -8,6 +9,7 @@ interface CellProps {
   isSimilar: boolean;
   isHidden: boolean;
   isNewValue: boolean;
+  notesOfCell: Set<number>;
   onSelect: () => void;
 }
 
@@ -19,8 +21,15 @@ export const Cell = ({
   isNeighbourOfSelected,
   isNewValue,
   isHidden,
+  notesOfCell,
   onSelect,
 }: CellProps) => {
+  const notes = Array.from({ length: 9 }, (_, idx) => {
+    const index = idx + 1;
+
+    return [...notesOfCell].includes(index) ? index : null;
+  }).map((value) => ({ id: uuid(), value }));
+
   return (
     <td
       onClick={onSelect}
@@ -39,6 +48,15 @@ export const Cell = ({
         style={{ opacity: value }}>
         {value}
       </span>
+      {!value && (
+        <div className="absolute grid p-1 pt-2.5 grid-cols-3 top-0 left-0 w-full h-full">
+          {notes.map(({ id, value }) => (
+            <span key={id} className="relative flex items-center opacity-60">
+              <span className="absolute top-0 left-0 w-full h-full text-[9px] leading-none font-normal">{value}</span>
+            </span>
+          ))}
+        </div>
+      )}
     </td>
   );
 };
