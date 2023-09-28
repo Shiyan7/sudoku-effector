@@ -4,11 +4,11 @@ import { newGameStarted } from './start';
 import { $countMistakes, $isLoss, $isWin, secondChanceClicked, startAgainClicked } from './status';
 import { $mistakes } from './mistakes';
 import { $selectedCell } from './cell';
-import { $isNotesEnabled, $notes } from './notes';
+import { $isNotesEnabled, $arrayOfNotes } from './notes';
 
 reset({
   clock: newGameStarted,
-  target: [timerModel.$time, $selectedCell, $notes, $isNotesEnabled],
+  target: [timerModel.$time, $selectedCell, $arrayOfNotes, $isNotesEnabled],
 });
 
 reset({

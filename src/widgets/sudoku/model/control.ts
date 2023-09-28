@@ -9,7 +9,7 @@ import { $mistakes, removeMistake, wrongCellClicked } from './mistakes';
 import { clearClicked } from './clear';
 import { timerModel } from '@/features/timer';
 import { not } from 'patronum';
-import { $isNotesEnabled, updateNoteCell } from './notes';
+import { $isNotesEnabled, cellNotesUpdated } from './notes';
 
 export const $updatedBoard = createStore('');
 
@@ -50,11 +50,11 @@ sample({
 sample({
   clock: [keyPressed, numberPressed],
   filter: $isNotesEnabled,
-  target: updateNoteCell,
+  target: cellNotesUpdated,
 });
 
 sample({
-  clock: [updateBoardFx.doneData, hintClicked, clearClicked, updateNoteCell],
+  clock: [updateBoardFx.doneData, hintClicked, clearClicked, cellNotesUpdated],
   source: { mistakes: $mistakes, indexOfCell: $selectedCell },
   filter: isCellHasMistake,
   target: removeMistake,
