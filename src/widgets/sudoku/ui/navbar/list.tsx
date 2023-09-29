@@ -20,7 +20,8 @@ export const NavbarList = ({ isOpen, close }: NavbarListProps) => {
         className={clsx(
           'absolute top-7 z-[1001] left-3 transition-transform origin-top-left',
           isOpen ? 'scale-100' : 'scale-0'
-        )}>
+        )}
+      >
         <ul className="flex flex-col gap-1 py-1 bg-white rounded-md drop-shadow-[0_15px_30px_rgba(0,0,0,0.25)]">
           {difficultyItems.map(({ type, label }) => {
             const isActive = type === params.type;
@@ -34,7 +35,8 @@ export const NavbarList = ({ isOpen, close }: NavbarListProps) => {
                   )}
                   onClick={close}
                   to={routes.game}
-                  params={{ type }}>
+                  params={{ type }}
+                >
                   {label}
                 </Link>
               </li>

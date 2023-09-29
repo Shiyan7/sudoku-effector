@@ -40,11 +40,13 @@ export const Cell = ({
         isNewValue ? 'text-blue-100' : 'text-blue-900',
         isError && 'text-red bg-[#f7cfd6]',
         isHidden && 'opacity-0'
-      )}>
+      )}
+    >
       <i className="opacity-0">0</i>
       <span
         className="absolute top-2/4 left-2/4 transform -translate-x-1/2 -translate-y-1/2"
-        style={{ opacity: value }}>
+        style={{ opacity: value }}
+      >
         {value}
       </span>
       {!value && (

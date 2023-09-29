@@ -5,7 +5,6 @@
   "useTabs": false,
   "semi": true,
   "tabWidth": 2,
-  "jsxBracketSameLine": true,
   "endOfLine": "lf",
   "singleQuote": true,
   "overrides": [

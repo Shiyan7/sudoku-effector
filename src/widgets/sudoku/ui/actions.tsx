@@ -30,7 +30,8 @@ export const Actions = ({ disabled }: ActionsProps) => {
       className={clsx(
         'absolute -top-2.5 -right-3 border-white border-2 flex items-center justify-center rounded-full w-10 h-7 uppercase text-xs leading-none tracking-wider text-white font-bold transition-colors',
         isNotesEnabled ? 'bg-blue-100 ' : 'bg-[#adb6c2]'
-      )}>
+      )}
+    >
       {isNotesEnabled ? 'On' : 'Off'}
     </span>
   );
@@ -49,7 +50,8 @@ export const Actions = ({ disabled }: ActionsProps) => {
           disabled={disabled}
           onClick={handler}
           key={label}
-          className="group cursor-default lg:cursor-pointer relative not-last:mr-9 md:not-last:mr-0 text-gray-400 md:text-blue-100 disabled:pointer-events-none disabled:text-gray-300">
+          className="group cursor-default lg:cursor-pointer relative not-last:mr-9 md:not-last:mr-0 text-gray-400 md:text-blue-100 disabled:pointer-events-none disabled:text-gray-300"
+        >
           {chip}
           <div className="flex items-center justify-center md:w-14 md:h-14 rounded-full md:bg-blue-400 md:group-hover:bg-blue-500 transition-colors">
             <Icon className="flex w-8 h-8 fill-current" name={iconName} />

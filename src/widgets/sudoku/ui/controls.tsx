@@ -24,7 +24,8 @@ export const Controls = ({ disabled }: ControlsProps) => {
           className={clsx(
             'rounded md:bg-blue-400 text-4xl md:font-light md:py-5 disabled:text-gray-300 disabled:pointer-events-none md:hover:bg-blue-500 transition-colors',
             isNotesEnabled ? 'text-gray-400' : 'text-blue-100'
-          )}>
+          )}
+        >
           {key}
         </button>
       ))}

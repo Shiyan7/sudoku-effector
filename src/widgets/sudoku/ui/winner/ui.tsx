@@ -16,14 +16,16 @@ export const Winner = () => {
       className={clsx(
         'absolute overflow-hidden flex flex-col items-center justify-center z-50 top-0 left-0 w-full h-full bg-custom-gradient rounded-xl',
         isWin ? 'opacity-100 visible' : 'opacity-0 invisible'
-      )}>
+      )}
+    >
       <Flags />
       <h2 className="text-white text-3xl pt-[85px] mb-4 font-semibold">Отлично!</h2>
       <Stats />
       <Button
         onClick={open}
         variant="square"
-        className="bg-white text-blue-100 text-base h-[50px] px-12 mt-5 hover:bg-[#f1f1f1]">
+        className="bg-white text-blue-100 text-base h-[50px] px-12 mt-5 hover:bg-[#f1f1f1]"
+      >
         Новая игра
       </Button>
     </div>
