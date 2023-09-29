@@ -17,6 +17,7 @@ export const Stats = () => {
   });
 
   const currentDifficulty = difficultyItems.find(({ type }) => type === params?.type);
+
   const stats: StatsItem[] = [
     { label: 'Уровень', icon: 'common/stats', value: currentDifficulty?.label },
     { label: 'Время', icon: 'common/time', value: formattedTime },

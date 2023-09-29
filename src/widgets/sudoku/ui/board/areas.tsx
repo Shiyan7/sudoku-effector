@@ -33,7 +33,7 @@ export const Areas = ({ cellWidth }: AreasProps) => {
                   }}>
                   <div className="absolute top-[0px] left-[0px]" style={areaStyle} />
                   {isFirstElement && (
-                    <span className="absolute z-10 bg-white top-[-2px] left-[-2px] p-[1px] text-[9px] leading-[9px] text-blue-900">
+                    <span className="absolute z-10 bg-white top-[-2px] left-[-2px] p-[1px] text-[9px] leading-[9px] text-blue-900 select-none">
                       {sum}
                     </span>
                   )}

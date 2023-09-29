@@ -5,6 +5,7 @@ import { routes } from '@/shared/routing';
 import { DEFAULT_DIFFICULTY } from '@/shared/config';
 import type { Sudoku } from 'sudoku-toolbox/types';
 import { generateSudoku } from 'sudoku-toolbox';
+import { $history, historyUpdated } from './history';
 
 const $sudoku = createStore<Sudoku>({
   puzzle: '',
@@ -37,6 +38,12 @@ sample({
 sample({
   clock: $sudoku,
   fn: ({ puzzle }) => puzzle,
+  target: historyUpdated,
+});
+
+sample({
+  clock: $history,
+  fn: (array) => array[array.length - 1],
   target: $board,
 });
 

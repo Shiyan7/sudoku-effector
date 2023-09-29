@@ -1,15 +1,15 @@
 import { createEffect, createEvent, createStore, sample } from 'effector';
 import { hotkey } from 'effector-hotkey';
 import { $selectedCell } from './cell';
-import { $board, $solution } from './start';
-import { $countMistakes } from './status';
-import { isCellHasMistake, updateBoardWithErrorHandling, updateBoardWithKey } from '../lib';
+import { $board, $initBoard, $solution } from './start';
+import { $countMistakes, $mistakes } from './status';
+import { checkMistakes, updateBoardWithErrorHandling, updateBoardWithKey } from '../lib';
 import { hintClicked } from './hint';
-import { $mistakes, removeMistake, wrongCellClicked } from './mistakes';
 import { clearClicked } from './clear';
 import { timerModel } from '@/features/timer';
 import { not } from 'patronum';
 import { $isNotesEnabled, cellNotesUpdated } from './notes';
+import { backwardClicked, historyUpdated } from './history';
 
 export const $updatedBoard = createStore('');
 
@@ -54,24 +54,21 @@ sample({
 });
 
 sample({
-  clock: [updateBoardFx.doneData, hintClicked, clearClicked, cellNotesUpdated],
-  source: { mistakes: $mistakes, indexOfCell: $selectedCell },
-  filter: isCellHasMistake,
-  target: removeMistake,
-});
-
-sample({
-  clock: updateBoardFx.failData,
-  source: { indexOfCell: $selectedCell },
-  target: wrongCellClicked,
+  clock: [$board, hintClicked, clearClicked, backwardClicked, cellNotesUpdated],
+  source: { initBoard: $initBoard, board: $board, solution: $solution },
+  fn: checkMistakes,
+  target: $mistakes,
 });
 
 sample({
   clock: updateBoardFx.failData,
   source: $updatedBoard,
-  target: $board,
+  target: historyUpdated,
 });
 
-$board.on(updateBoardFx.doneData, (_, payload) => payload);
+sample({
+  clock: updateBoardFx.doneData,
+  target: historyUpdated,
+});
 
 $countMistakes.on(updateBoardFx.failData, (state) => state + 1);

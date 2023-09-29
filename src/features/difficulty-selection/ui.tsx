@@ -46,7 +46,7 @@ export const DifficultySelection = ({
             <li
               onClick={onStartAgain}
               className="flex bg-blue-300 items-center cursor-pointer text-[15px] text-blue-100 not-last:border-b-[1px] not-last:border-b-[#e0e8f7] py-[10px] px-[15px] font-medium hover:bg-[#e4eaf1] transition-colors">
-              <Icon className="flex w-[24px] h-[24px] mr-[7px]" name="actions/cancel" />
+              <Icon className="flex w-[24px] h-[24px] mr-[7px] fill-current" name="actions/cancel" />
               Начать заново
             </li>
           )}

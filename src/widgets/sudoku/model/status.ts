@@ -7,6 +7,7 @@ import { timerModel } from '@/features/timer';
 export const gameOverToggler = createToggler();
 export const $countMistakes = createStore(0);
 
+export const $mistakes = createStore<Set<number>>(new Set());
 export const $isLoss = createStore(false);
 export const $isWin = createStore(false);
 

@@ -2,7 +2,8 @@ import { createEvent, sample } from 'effector';
 import { $selectedCell } from './cell';
 import { $board, $solution } from './start';
 import { isCellEmptyOrMistake, updateBoardWithSolution } from '../lib';
-import { $mistakes } from './mistakes';
+import { historyUpdated } from './history';
+import { $mistakes } from './status';
 
 export const hintClicked = createEvent();
 
@@ -11,5 +12,5 @@ sample({
   filter: isCellEmptyOrMistake,
   source: { board: $board, indexOfCell: $selectedCell, solution: $solution, mistakes: $mistakes },
   fn: updateBoardWithSolution,
-  target: $board,
+  target: historyUpdated,
 });
