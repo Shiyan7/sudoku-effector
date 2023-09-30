@@ -3,6 +3,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: ['class', '[data-theme="dark"]'],
   content: {
     files: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   },
@@ -11,20 +12,34 @@ module.exports = {
       'border-color': 'hsla(0, 0%, 100%, .2)',
       transparent: 'transparent',
       white: '#fff',
-      black: '#000',
-      red: '#e55c6c',
+      black: '#030305',
+      dark: {
+        100: '#25242C',
+        200: '#16151A',
+        300: '#353342',
+        400: '#121212',
+      },
+      red: {
+        100: '#f7cfd6',
+        200: '#e55c6c',
+        300: '#6A0307',
+      },
       current: 'currentColor',
       gray: {
-        100: '#f4f4f4',
+        100: '#91949D',
         300: '#94a3b7',
         400: '#6e7c8c',
       },
       blue: {
         100: '#0072e3',
+        '100-dark': '#6B94CA',
         200: '#b9c8da',
         300: '#f3f6fa',
         400: '#eaeef4',
         500: '#dce3ed',
+        600: '#013E7F',
+        700: '#bbdefb',
+        800: '#e2ebf3',
         900: '#314b62',
       },
     },
@@ -32,6 +47,9 @@ module.exports = {
       sans: ['Inter', ...defaultTheme.fontFamily.sans],
     },
     extend: {
+      borderWidth: {
+        'sudoku-border': '2.5px',
+      },
       zIndex: {
         1000: '1000',
       },

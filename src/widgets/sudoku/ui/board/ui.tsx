@@ -74,11 +74,17 @@ export const Board = () => {
       <Winner />
       {isRunning && <Areas cellWidth={cellWidth} />}
       <table
-        className={clsx('md:static absolute top-0 left-0 w-full h-full border-2 border-blue-900', isWin && 'opacity-0')}
+        className={clsx(
+          'md:static absolute top-0 dark:bg-dark-100 left-0 w-full h-full border-sudoku-border border-blue-900 dark:border-black',
+          isWin && 'opacity-0'
+        )}
       >
         <tbody>
           {rows.map((row) => (
-            <tr key={row} className="[&:nth-child(3n)]:border-b-[2px] [&:nth-child(3n)]:border-blue-900">
+            <tr
+              key={row}
+              className="[&:nth-child(3n)]:border-b-sudoku-border [&:nth-child(3n)]:border-blue-900 dark:[&:nth-child(3n)]:border-black"
+            >
               {rows.map((column) => {
                 const indexOfCell = row * TABLE_COLS + column;
                 const value = grid[indexOfCell];
@@ -87,7 +93,7 @@ export const Board = () => {
                 const isColumnSelected = selectedColumn === column;
                 const isError = [...mistakes].includes(indexOfCell);
                 const isInSegment = segment.includes(indexOfCell);
-                const isSimilar = value === selectedValue;
+                const isSimilar = !!value && value === selectedValue;
                 const isNewValue = initBoard[indexOfCell] !== String(value);
                 const notesOfCell = arrayOfNotes[indexOfCell];
 

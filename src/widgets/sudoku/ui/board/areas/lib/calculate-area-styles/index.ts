@@ -10,17 +10,18 @@ type CellState = {
 interface CalculateAreaStylesParams {
   cellState: CellState;
   cellWidth: number;
+  borderColor: string;
 }
 
-const CELL_OFFSET = 1;
-const BORDER_WIDTH = 1.6;
-const OFFSET = 5;
+const CELL_OFFSET = 1.2;
+const BORDER_WIDTH = 1.2;
+const OFFSET = 6.7;
 
-function getBorderStyle(hasNeighbour: boolean) {
-  return hasNeighbour ? 'none' : `${BORDER_WIDTH}px dashed #314b62`;
+function getBorderStyle(hasNeighbour: boolean, borderColor: string) {
+  return hasNeighbour ? 'none' : `${BORDER_WIDTH}px dashed ${borderColor}`;
 }
 
-export function calculateAreaStyles({ cellState, cellWidth }: CalculateAreaStylesParams) {
+export function calculateAreaStyles({ cellState, cellWidth, borderColor }: CalculateAreaStylesParams) {
   const { hasCellAbove, hasCellRight, hasCellBelow, hasCellLeft } = cellState;
 
   const CELL_SIZE = cellWidth - BORDER_WIDTH * 2 * (CELL_OFFSET * 2);
@@ -32,10 +33,10 @@ export function calculateAreaStyles({ cellState, cellWidth }: CalculateAreaStyle
     left: '0px',
     width: `${CELL_SIZE}px`,
     height: `${CELL_SIZE}px`,
-    borderBottom: getBorderStyle(hasCellBelow),
-    borderRight: getBorderStyle(hasCellRight),
-    borderTop: getBorderStyle(hasCellAbove),
-    borderLeft: getBorderStyle(hasCellLeft),
+    borderBottom: getBorderStyle(hasCellBelow, borderColor),
+    borderRight: getBorderStyle(hasCellRight, borderColor),
+    borderTop: getBorderStyle(hasCellAbove, borderColor),
+    borderLeft: getBorderStyle(hasCellLeft, borderColor),
   };
 
   if (hasCellAbove) {

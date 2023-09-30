@@ -33,7 +33,7 @@ export const Navbar = () => {
                 <Link
                   className={clsx(
                     'inline-block rounded transition duration-200 hover:bg-[#f1f4f8] text-xs font-semibold p-2',
-                    isActive ? 'text-blue-100' : 'text-gray-400'
+                    isActive ? 'text-blue-100 dark:text-blue-100-dark' : 'text-gray-400'
                   )}
                   to={routes.game}
                   params={{ type }}
@@ -46,7 +46,7 @@ export const Navbar = () => {
         </ul>
         <button
           onClick={() => setIsListOpen(true)}
-          className="flex md:hidden items-center text-xs font-semibold text-gray-300"
+          className="flex md:hidden items-center text-xs font-semibold text-gray-300 dark:text-gray-100"
         >
           {currentDifficulty?.label}
           <Icon
@@ -55,7 +55,7 @@ export const Navbar = () => {
           />
         </button>
       </div>
-      <div className="text-blue-900 text-xs font-semibold">Ошибки: {countMistakes}/3</div>
+      <div className="text-blue-900 dark:text-gray-100 text-xs font-semibold">Ошибки: {countMistakes}/3</div>
       <Timer disabled={isWin} />
       <NavbarList isOpen={isListOpen} close={() => setIsListOpen(false)} />
     </div>
