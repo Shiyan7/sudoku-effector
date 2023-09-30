@@ -1,7 +1,7 @@
 import type { HTMLAttributes, PropsWithChildren } from 'react';
 import { VariantProps, tv } from 'tailwind-variants';
 
-const base = 'text-blue-900 font-bold';
+const base = 'text-blue-900 font-bold dark:text-blue-200';
 
 const titleVariants = tv({
   base,

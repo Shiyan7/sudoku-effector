@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import styles from './styles.module.scss';
 
 interface CellProps {
   value: number;
@@ -33,13 +34,16 @@ export const Cell = ({
     <td
       onClick={onSelect}
       className={clsx(
-        'relative md:text-3xl text-2xl font-light text-center border-[1px] border-blue-200 md:w-[48px] md:h-[48px] w-[auto] h-[auto] [&:nth-child(3n)]:border-r-[2px] [&:nth-child(3n)]:border-r-blue-900 select-none',
-        isNeighbourOfSelected && 'bg-[#e2ebf3]',
-        isCellSelected && '!bg-[#bbdefb]',
-        isSimilar && value && 'bg-[#c3d7ea]',
-        isNewValue ? 'text-blue-100' : 'text-blue-900',
-        isError && 'text-red bg-[#f7cfd6]',
-        isHidden && 'opacity-0'
+        'relative md:text-[30px] text-[25px] leading-none text-center border-[1px] border-blue-200 dark:border-black md:w-[48px] md:h-[48px] w-[auto] h-[auto] [&:nth-child(3n)]:border-r-sudoku-border [&:nth-child(3n)]:border-r-blue-900 dark:[&:nth-child(3n)]:border-r-black select-none',
+        styles.cell,
+        {
+          [styles.isNeighbourOfSelected]: isNeighbourOfSelected,
+          [styles.isCellSelected]: isCellSelected,
+          [styles.isSimilar]: isSimilar,
+          [styles.isNewValue]: isNewValue,
+          [styles.isError]: isError,
+          [styles.isHidden]: isHidden,
+        }
       )}
     >
       <i className="opacity-0">0</i>
@@ -50,9 +54,9 @@ export const Cell = ({
         {value}
       </span>
       {!value && (
-        <div className="absolute grid p-1 pt-2.5 grid-cols-3 top-0 left-0 w-full h-full">
+        <div className="absolute grid p-1 px-1.5 pt-2.5 grid-cols-3 top-0 left-0 w-full h-full">
           {notes.map((note, idx) => (
-            <span key={idx} className="relative flex items-center opacity-60">
+            <span key={idx} className="relative flex items-center opacity-60 dark:opacity-100 pointer-events-none">
               <span className="absolute top-0 left-0 w-full h-full text-[9px] leading-none font-normal">{note}</span>
             </span>
           ))}

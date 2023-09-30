@@ -1,11 +1,11 @@
 export interface SpritesMap {
   actions: 'bulb' | 'cancel' | 'clear' | 'pen';
-  common: 'add' | 'chevron' | 'pause' | 'play' | 'settings' | 'stats' | 'sudoku' | 'time';
+  common: 'add' | 'chevron' | 'moon' | 'pause' | 'play' | 'settings' | 'stats' | 'sudoku' | 'sun' | 'time';
 }
 export const SPRITES_META = {
   actions: ['bulb', 'cancel', 'clear', 'pen'],
-  common: ['add', 'chevron', 'pause', 'play', 'settings', 'stats', 'sudoku', 'time'],
+  common: ['add', 'chevron', 'moon', 'pause', 'play', 'settings', 'stats', 'sudoku', 'sun', 'time'],
 } satisfies {
   actions: Array<'bulb' | 'cancel' | 'clear' | 'pen'>;
-  common: Array<'add' | 'chevron' | 'pause' | 'play' | 'settings' | 'stats' | 'sudoku' | 'time'>;
+  common: Array<'add' | 'chevron' | 'moon' | 'pause' | 'play' | 'settings' | 'stats' | 'sudoku' | 'sun' | 'time'>;
 };

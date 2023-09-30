@@ -1,12 +1,15 @@
 import { useUnit } from 'effector-react';
 import { sudokuModel } from '@/widgets/sudoku';
 import { calculateAreaStyles, calculateNeighbours, calculatePosition } from './lib';
+import { useTheme } from 'next-themes';
 
 interface AreasProps {
   cellWidth: number;
 }
 
 export const Areas = ({ cellWidth }: AreasProps) => {
+  const { theme } = useTheme();
+
   const { areas } = useUnit({ areas: sudokuModel.$areas });
 
   return (
@@ -21,7 +24,11 @@ export const Areas = ({ cellWidth }: AreasProps) => {
 
               const cellState = calculateNeighbours({ x, y, cells });
 
-              const areaStyle = calculateAreaStyles({ cellState, cellWidth });
+              const areaStyle = calculateAreaStyles({
+                cellState,
+                cellWidth,
+                borderColor: theme === 'light' ? '#314b62' : '#5A5A62',
+              });
 
               return (
                 <div
@@ -34,7 +41,7 @@ export const Areas = ({ cellWidth }: AreasProps) => {
                 >
                   <div className="absolute top-[0px] left-[0px]" style={areaStyle} />
                   {isFirstElement && (
-                    <span className="absolute z-10 bg-white top-[-2px] left-[-2px] p-[1px] text-[9px] leading-[9px] text-blue-900 select-none">
+                    <span className="absolute z-10 bg-white dark:bg-[#25242C] dark:text-blue-200 top-[-2px] left-[-2px] p-[1px] text-[9px] leading-[9px] text-blue-900 select-none">
                       {sum}
                     </span>
                   )}

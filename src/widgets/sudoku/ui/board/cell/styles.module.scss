@@ -1,0 +1,47 @@
+.isNeighbourOfSelected {
+  @apply bg-blue-800;
+}
+
+.isSimilar:not(.isCellSelected) {
+  @apply bg-blue-200;
+}
+
+.isNewValue {
+  @apply text-blue-100;
+}
+
+.isError {
+  @apply bg-red-100 text-red-200 dark:bg-red-300 #{!important};
+}
+
+.isCellSelected {
+  @apply bg-blue-700 #{!important};
+}
+
+.isHidden {
+  @apply opacity-0;
+}
+
+.cell:not(.isNewValue) {
+  @apply text-blue-900;
+}
+
+[data-theme="dark"] {
+  .cell {
+    &:not(.isNewValue) {
+      @apply text-gray-100;
+    }
+
+    &.isNeighbourOfSelected {
+      @apply bg-dark-200;
+    }
+
+    &.isCellSelected {
+      @apply bg-blue-600 #{!important};
+    }
+
+    &.isSimilar:not(.isCellSelected) {
+      @apply bg-black;
+    }
+  }
+}
