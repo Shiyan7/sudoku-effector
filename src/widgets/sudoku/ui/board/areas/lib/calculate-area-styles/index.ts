@@ -13,12 +13,12 @@ interface CalculateAreaStylesParams {
   borderColor: string;
 }
 
-const CELL_OFFSET = 1.2;
-const BORDER_WIDTH = 1.2;
+const CELL_OFFSET = 1.5;
+const BORDER_WIDTH = 1;
 const OFFSET = 6.7;
 
 function getBorderStyle(hasNeighbour: boolean, borderColor: string) {
-  return hasNeighbour ? 'none' : `${BORDER_WIDTH}px dashed ${borderColor}`;
+  return hasNeighbour ? 'none' : `${BORDER_WIDTH}px solid ${borderColor}`;
 }
 
 export function calculateAreaStyles({ cellState, cellWidth, borderColor }: CalculateAreaStylesParams) {
