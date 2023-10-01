@@ -22,7 +22,7 @@ export const Controls = ({ disabled }: ControlsProps) => {
           onClick={() => numberPressed({ key })}
           key={key}
           className={clsx(
-            'rounded md:bg-blue-400 dark:md:bg-dark-100 dark:md:hover:bg-dark-300 text-4xl md:font-light md:py-5 disabled:text-gray-300 disabled:pointer-events-none md:hover:bg-blue-500 transition-colors',
+            'rounded md:bg-blue-400 dark:md:bg-dark-100 dark:md:hover:bg-dark-300 text-4xl md:font-light md:py-5 disabled:!text-gray-300 disabled:pointer-events-none md:hover:bg-blue-500 transition-colors',
             isNotesEnabled ? 'text-gray-400' : 'text-blue-100 dark:text-blue-100-dark'
           )}
         >

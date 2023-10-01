@@ -32,8 +32,8 @@ export const Navbar = () => {
               <li className="not-last:mr-1" key={type}>
                 <Link
                   className={clsx(
-                    'inline-block rounded transition duration-200 hover:bg-[#f1f4f8] text-xs font-semibold p-2',
-                    isActive ? 'text-blue-100 dark:text-blue-100-dark' : 'text-gray-400'
+                    'inline-block rounded transition duration-200 hover:bg-[#f1f4f8] hover:text-[#5D6773] dark:hover:bg-dark-100 dark:hover:text-blue-200 text-xs font-semibold p-2',
+                    isActive ? '!text-blue-100 dark:!text-blue-100-dark' : 'text-gray-400'
                   )}
                   to={routes.game}
                   params={{ type }}

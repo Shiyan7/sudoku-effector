@@ -50,7 +50,7 @@ export const Actions = ({ disabled }: ActionsProps) => {
           disabled={disabled}
           onClick={handler}
           key={label}
-          className="group cursor-default lg:cursor-pointer relative not-last:mr-9 md:not-last:mr-0 text-gray-400 md:text-blue-100 dark:md:text-blue-100-dark disabled:pointer-events-none disabled:text-gray-300"
+          className="group cursor-default lg:cursor-pointer relative not-last:mr-9 md:not-last:mr-0 text-gray-400 md:text-blue-100 dark:md:text-blue-100-dark disabled:pointer-events-none disabled:!text-gray-300"
         >
           {chip}
           <div className="flex items-center justify-center md:w-14 md:h-14 rounded-full md:bg-blue-400 dark:md:bg-dark-100 dark:md:group-hover:bg-dark-300 md:group-hover:bg-blue-500 transition-colors">

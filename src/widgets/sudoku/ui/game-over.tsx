@@ -17,7 +17,9 @@ export const GameOver = () => {
         <Title className="mb-2" size="md">
           Игра окончена
         </Title>
-        <p className="text-gray-300 text-[15px] font-semibold mb-5">Вы сделали 3 ошибки и проиграли в этой игре</p>
+        <p className="text-gray-300 dark:text-[#808B99] text-[15px] font-semibold mb-5">
+          Вы сделали 3 ошибки и проиграли в этой игре
+        </p>
         <Button className="text-[14px] mb-4 w-full h-[50px]" variant="square" onClick={secondChanceClicked}>
           Второй шанс
         </Button>

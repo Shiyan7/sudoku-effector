@@ -28,7 +28,7 @@ export const DifficultySelection = ({
           Выберите режим игры
         </Title>
         <p className="text-center text-xs text-gray-400">{description}</p>
-        <ul className="rounded-md overflow-hidden mt-5">
+        <ul className="overflow-hidden mt-5">
           {difficultyItems.map(({ type, label }) => (
             <li
               key={type}
@@ -37,22 +37,20 @@ export const DifficultySelection = ({
                   type,
                 })
               }
-              className="flex bg-blue-300 dark:bg-[#33313D] dark:hover:bg-[#3C394B] items-center cursor-pointer text-blue-100 not-last:border-b-[1px] not-last:border-b-[#e0e8f7] dark:not-last:border-b-[#3C394B] py-[10px] px-[15px] font-medium hover:bg-[#e4eaf1] transition-colors"
+              className="flex mb-1.5 bg-blue-300 rounded-md dark:bg-[#31333D] dark:hover:bg-[#3F4353] items-center justify-center cursor-pointer text-blue-100 py-[10px] px-[15px] font-medium hover:bg-[#e4eaf1] transition-colors"
             >
-              <Icon className="w-[21px] h-[21px] mr-[10px]" name="common/sudoku" />
               {label}
             </li>
           ))}
-          {onStartAgain && (
-            <li
-              onClick={onStartAgain}
-              className="flex bg-blue-300 dark:bg-[#33313D] dark:hover:bg-[#3C394B] items-center cursor-pointer text-[15px] text-blue-100 not-last:border-b-[1px] not-last:border-b-[#e0e8f7] py-[10px] px-[15px] font-medium hover:bg-[#e4eaf1] transition-colors"
-            >
-              <Icon className="flex w-[24px] h-[24px] mr-[7px] fill-current" name="actions/cancel" />
-              Начать заново
-            </li>
-          )}
         </ul>
+        {onStartAgain && (
+          <button
+            onClick={onStartAgain}
+            className="rounded-md w-full flex justify-center bg-blue-300 dark:bg-[#31333D] dark:hover:bg-[#3F4353] items-center cursor-pointer text-blue-100 not-last:border-b-[1px] not-last:border-b-[#e0e8f7] py-[10px] px-[15px] font-medium hover:bg-[#e4eaf1] transition-colors"
+          >
+            Начать заново
+          </button>
+        )}
       </div>
       {onCancel && (
         <button
