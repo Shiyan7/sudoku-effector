@@ -28,7 +28,7 @@ export const Header = () => {
         <Icon className="w-8 h-8 md:w-5 md:h-5 mr-1" name="common/chevron" />
         <span className="hidden md:block">Назад</span>
       </Link>
-      <span className="absolute left-2/4 -translate-x-2/4 text-lg font-bold text-blue-900 dark:text-gray-100">
+      <span className="absolute left-2/4 -translate-x-2/4 text-lg font-bold text-blue-900 dark:text-[#B8C0CB]">
         Киллер судоку
       </span>
       <div className="ml-auto flex items-center gap-4">
