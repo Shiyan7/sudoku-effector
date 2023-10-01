@@ -22,18 +22,18 @@ export const NavbarList = ({ isOpen, close }: NavbarListProps) => {
           isOpen ? 'scale-100' : 'scale-0'
         )}
       >
-        <ul className="flex flex-col gap-1 py-1 bg-white dark:bg-[#25242C] rounded-md drop-shadow-[0_15px_30px_rgba(0,0,0,0.25)]">
+        <ul className="flex flex-col bg-white dark:bg-[#25242C] rounded-md drop-shadow-[0_15px_30px_rgba(0,0,0,0.25)]">
           {difficultyItems.map(({ type, label }) => {
             const isActive = type === params.type;
 
             return (
               <li
-                className="not-last:border-b-[1px] not-last:border-b-[#e0e8f7] dark:not-last:border-b-[#3C394B] px-1.5 not-last:pb-1"
+                className="not-last:border-b-[1px] not-last:border-b-[#e0e8f7] dark:not-last:border-b-[#3C394B]"
                 key={type}
               >
                 <Link
                   className={clsx(
-                    'inline-block rounded-md transition duration-200 text-xs font-semibold py-2 px-3 w-full',
+                    'inline-block rounded-md transition duration-200 text-xs font-semibold py-3 px-[18px] w-full',
                     isActive ? 'text-blue-100 dark:text-blue-100-dark' : 'text-gray-400 dark:text-gray-100'
                   )}
                   onClick={close}

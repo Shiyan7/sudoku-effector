@@ -3,7 +3,7 @@ import { Modal } from '@/shared/ui/modal';
 import { useToggler } from '@/shared/lib';
 import { difficultyModel } from '@/features/difficulty-selection';
 import { difficultyItems } from '@/shared/config';
-import { Icon, Title } from '@/shared/ui';
+import { Title } from '@/shared/ui';
 
 interface DifficultySelectionProps {
   description: string;
