@@ -5,7 +5,7 @@ import { ThemeProvider } from 'next-themes';
 
 export const App = () => {
   return (
-    <ThemeProvider>
+    <ThemeProvider enableSystem={false}>
       <RouterProvider router={router}>
         <Pages />
       </RouterProvider>
